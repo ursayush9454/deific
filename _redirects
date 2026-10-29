@@ -1,0 +1,5 @@
+/products/prop-ai /propai 301
+/products/prop-ai/ /propai 301
+/products/prop-ai/index.html /propai 301
+/index.html / 301
+/*/index.html /:splat 301

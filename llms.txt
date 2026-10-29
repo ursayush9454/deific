@@ -1,0 +1,28 @@
+# Deific Digital
+> Custom AI agents and business automation for companies in India and the UAE: AI receptionist, WhatsApp sales agent, customer support bots, CRM and software development. Based in Kanpur, India.
+
+## Main pages
+- [Home](https://deificdigital.com/): AI agents and automation overview
+- [AI agents](https://deificdigital.com/ai-agents)
+- [Products](https://deificdigital.com/products)
+- [PropAI - real estate CRM](https://deificdigital.com/propai)
+- [UAE](https://deificdigital.com/uae)
+- [Portfolio](https://deificdigital.com/portfolio)
+- [About](https://deificdigital.com/about)
+- [Contact](https://deificdigital.com/contact)
+- [Hospital Management AI](https://deificdigital.com/industries/hospital-management-ai)
+- [CA Firm Automation](https://deificdigital.com/industries/ca-firm-automation)
+- [Car Dealer Automation](https://deificdigital.com/industries/car-dealer-automation)
+- [Smart City Solutions](https://deificdigital.com/industries/smart-city-solutions)
+- [Game Development](https://deificdigital.com/services/game-development)
+
+## Products
+- PropAI: WhatsApp AI and CRM for real estate
+- AI Review Ninja Pro: customer reviews and Google Business Profile ranking (https://reviewninjapro.com)
+- Monica AI: WhatsApp bot for customer replies and lead capture
+- CA Automation: GST and document reminders for CA firms
+- Medi Assist: appointment booking and patient queries for clinics and hospitals
+
+## Contact
+- WhatsApp / phone: +91 87502 00899
+- Email: hello@deificdigital.com
