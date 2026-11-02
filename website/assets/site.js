@@ -3162,7 +3162,7 @@ window.DD_GA4_ID = "G-2DZCJGWLVB";
     wa: "(اختياري) التواصل معي عبر واتساب.",
     err: "يُرجى الموافقة على معالجة بياناتك لإرسال الاستفسار.",
     bTitle: "ملفات تعريف الارتباط على موقعنا",
-    bText: "نستخدم ملفات تعريف الارتباط الضرورية لتشغيل الموقع. وبموافقتك نستخدم أيضًا ملفات التحليلات (Google Analytics) لفهم كيفية استخدام الموقع. يمكنك تغيير اختيارك في أي وقت من «إعدادات ملفات تعريف الارتباط» أسفل الصفحة.",
+    bText: "نستخدم ملفات تعريف الارتباط الضرورية، وملفات التحليلات بموافقتك فقط.",
     accept: "قبول التحليلات", reject: "رفض غير الضروري", settings: "إعدادات ملفات تعريف الارتباط",
     privacy: "/uae/ar/privacy-policy/"
   } : {
@@ -3172,7 +3172,7 @@ window.DD_GA4_ID = "G-2DZCJGWLVB";
     wa: "(Optional) Contact me on WhatsApp.",
     err: "Please tick the consent box so we can process your details and send your enquiry.",
     bTitle: "Cookies on our website",
-    bText: "We use essential cookies to run this site. With your permission we also use analytics cookies (Google Analytics) to understand how the site is used. You can change your choice at any time from “Cookie settings” in the footer.",
+    bText: "We use essential cookies, and analytics cookies only with your permission.",
     accept: "Accept analytics", reject: "Reject non-essential", settings: "Cookie settings",
     privacy: "/privacy-policy/"
   };
@@ -3298,7 +3298,8 @@ window.DD_GA4_ID = "G-2DZCJGWLVB";
     var a = document.createElement("a"); a.href = privacyHref(); a.target = "_blank"; a.rel = "noopener"; a.textContent = TXT.policy;
     s1.appendChild(a); s1.appendChild(document.createTextNode(TXT.consentEnd));
     l1.appendChild(c1); l1.appendChild(s1); box.appendChild(l1);
-    if (form.querySelector('input[type="tel"],input[name="phone"]')) {
+    /* Hero form field is already a WhatsApp number, so the extra opt-in line is skipped there. */
+    if (form.querySelector('input[type="tel"],input[name="phone"]') && !form.querySelector("#hero-phone-hint")) {
       var l2 = document.createElement("label"); l2.className = "dd-consent"; l2.setAttribute("for", "dd-consent-wa-" + uid);
       var c2 = document.createElement("input"); c2.type = "checkbox"; c2.id = "dd-consent-wa-" + uid; c2.name = "whatsapp_optin"; c2.setAttribute("data-dd-consent", "whatsapp");
       var s2 = document.createElement("span"); s2.textContent = TXT.wa;

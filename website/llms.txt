@@ -4,6 +4,7 @@
 ## Main pages
 - [Home](https://deificdigital.com/): AI agents and automation overview
 - [AI agents](https://deificdigital.com/ai-agents)
+- [Services](https://deificdigital.com/services)
 - [Products](https://deificdigital.com/products)
 - [PropAI - real estate CRM](https://deificdigital.com/propai)
 - [UAE](https://deificdigital.com/uae)
