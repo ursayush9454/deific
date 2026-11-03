@@ -7,6 +7,7 @@ const NAV = [
   ['/', 'Dashboard', 'home', true],
   ['/blogs', 'Blogs', 'blog'],
   ['/products', 'Products', 'box'],
+  ['/projects', 'Portfolio Projects', 'briefcase'],
   ['/media', 'Media Library', 'image'],
 ];
 const ADMIN_NAV = [

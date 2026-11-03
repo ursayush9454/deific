@@ -22,6 +22,7 @@ export default function Dashboard() {
   const greet = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
   return (
     <Layout title="Dashboard" actions={<>
+      <Link className="btn" to="/projects/new"><Icon n="plus" s={15} /> New project</Link>
       <Link className="btn" to="/products/new"><Icon n="plus" s={15} /> New product</Link>
       <Link className="btn btn-primary" to="/blogs/new"><Icon n="plus" s={15} /> New blog post</Link>
     </>}>
@@ -33,6 +34,7 @@ export default function Dashboard() {
         <div className="stats">
           <Link className="stat" to="/blogs"><span className="stat-ic red"><Icon n="blog" /></span><div><b>{d.blogs.live}</b><small>Live blog posts</small></div><em>{d.blogs.drafts} drafts · {d.blogs.scheduled} scheduled</em></Link>
           <Link className="stat" to="/products"><span className="stat-ic navy"><Icon n="box" /></span><div><b>{d.products.live}</b><small>Live products</small></div><em>{d.products.drafts} drafts</em></Link>
+          <Link className="stat" to="/projects"><span className="stat-ic amber"><Icon n="briefcase" /></span><div><b>{d.projects.live}</b><small>Portfolio projects</small></div><em>{d.projects.drafts} drafts</em></Link>
           <Link className="stat" to="/media"><span className="stat-ic green"><Icon n="image" /></span><div><b>{d.media.count}</b><small>Uploaded images</small></div><em>{humanSize(d.media.size)} total</em></Link>
           <div className="stat"><span className="stat-ic amber"><Icon n="activity" /></span><div><b>{d.activityCount}</b><small>Actions logged</small></div><em>Last: {d.activity[0] ? timeAgo(d.activity[0].at) : '—'}</em></div>
         </div>
@@ -48,7 +50,7 @@ export default function Dashboard() {
               <ul className="list">
                 {d.recent.map((r) => (
                   <li key={r.id}>
-                    <span className={`tag tag-${r.type}`}>{r.type === 'blog' ? 'Blog' : 'Product'}</span>
+                    <span className={`tag tag-${r.type}`}>{r.type === 'blog' ? 'Blog' : r.type === 'project' ? 'Project' : 'Product'}</span>
                     <Link to={`/${r.type}s/${r.id}`} className="grow"><b>{r.name}</b><small>{timeAgo(r.updated_at)}</small></Link>
                     <StatusPill s={r.status} />
                   </li>
@@ -61,6 +63,7 @@ export default function Dashboard() {
               <div className="card-b quick">
                 <Link to="/blogs/new"><Icon n="blog" />Write blog</Link>
                 <Link to="/products/new"><Icon n="box" />Add product</Link>
+                <Link to="/projects/new"><Icon n="briefcase" />Add project</Link>
                 <Link to="/media"><Icon n="upload" />Upload images</Link>
                 <a href="/blog" target="_blank" rel="noopener"><Icon n="external" />Open blog</a>
               </div>

@@ -40,7 +40,7 @@ export default function Media() {
         onDrop={(e) => { e.preventDefault(); setDrag(false); run(e.dataTransfer.files); }}>
         <Icon n="upload" s={30} />
         <p><b>Images yahan drag &amp; drop karein</b> ya <label className="link">browse karein<input type="file" accept="image/*" multiple hidden onChange={(e) => run(e.target.files)} /></label></p>
-        <p className="help">JPG, PNG, WebP, GIF, SVG · max 10 MB · apne aap WebP me compress hoti hain</p>
+        <p className="help">JPG, PNG, WebP, GIF, SVG · max 10 MB · apne aap compress hoti hain</p>
         {progress && <div className="dz-progress">{progress}</div>}
       </div>
       <div className="card">
@@ -57,7 +57,7 @@ export default function Media() {
                   <span className="name" title={m.name}>{m.name}</span>
                   <small className="muted">{humanSize(m.size)} · {new Date(m.mtime).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</small>
                   <span className="row">
-                    <button type="button" className="btn btn-sm" onClick={() => copyText(siteUrl + m.url, toast)}><Icon n="copy" s={14} /> URL</button>
+                    <button type="button" className="btn btn-sm" onClick={() => copyText(/^https?:\/\//.test(m.url) ? m.url : siteUrl + m.url, toast)}><Icon n="copy" s={14} /> URL</button>
                     <button type="button" className="icon-btn danger" onClick={() => del(m)} title="Delete"><Icon n="trash" s={14} /></button>
                   </span>
                 </figcaption>

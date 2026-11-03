@@ -9,15 +9,25 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {
   APP_DIR, SITE_DIR, DATA_DIR, BACKUP_DIR, UPLOAD_DIR, UPLOAD_REL, VERSION,
-  dbGet, dbPut, settings, saveSettings, secret, blogs, products, mediaList, logActivity,
+  dbGet, dbPut, settings, saveSettings, secret, blogs, products, projects, mediaList, logActivity,
   backupFile, atomicWrite, isWritable, newId, nowIso, today,
   saveCredsToEnv, recoveryKey, checkRecoveryKey,
 } from './lib/core.js';
 import {
   loadTemplate, templateDepthOk, staticBlogs, staticProducts, published, sortedBlogs, sortedProducts,
-  renderBlogPage, renderProductPage, removePage, syncType, runScheduler,
+  renderBlogPage, renderProductPage, removePage, syncType, runScheduler, staticProjects, sortedProjects,
 } from './lib/render.js';
-import { blogFromBody, productFromBody, uniqueSlug, saveImage, canWebp } from './lib/content.js';
+import { cloudEnabled, cloudList, cloudDelete, cloudId } from './lib/cloud.js';
+import { blogFromBody, productFromBody, projectFromBody, uniqueSlug, saveImage, canWebp } from './lib/content.js';
+import { connectDb, dbEnabled, flushDb, closeDb, dbLastError } from './lib/db.js';
+
+// MongoDB (agar MONGODB_URI set hai) - data load hone ke baad hi server chalega
+try {
+  if (await connectDb(DATA_DIR)) console.log('  [db] MongoDB connected');
+} catch (e) {
+  console.error('\n[!] MongoDB se connect nahi ho paya:', e.message, '\n    MONGODB_URI check karein (Atlas me IP allow-list bhi). Server band ho raha hai taaki data na khoye.\n');
+  process.exit(1);
+}
 
 const PORT = Number(process.env.PORT) || 3000;
 const SERVE_SITE = process.env.SERVE_SITE !== 'false';
@@ -172,6 +182,7 @@ function health() {
     ['Website folder found', fs.existsSync(path.join(SITE_DIR, 'index.html'))],
     ['blog/ folder writable', isWritable(path.join(SITE_DIR, 'blog'))],
     ['products/ folder writable', isWritable(path.join(SITE_DIR, 'products'))],
+    ['portfolio/ folder writable', isWritable(path.join(SITE_DIR, 'portfolio'))],
     ['Image uploads folder', isWritable(fs.existsSync(UPLOAD_DIR) ? UPLOAD_DIR : path.join(SITE_DIR, 'assets'))],
     ['WebP image conversion (sharp)', canWebp()],
     ['Blog page template', t('blog')],
@@ -186,19 +197,21 @@ api.get('/meta', (req, res) => {
     site_url: s.site_url, site_name: s.site_name, default_author: s.default_author, today: today(),
     blogCategories: cats([...blogs(), ...staticBlogs()], ['AI & Automation', 'Software Development', 'Digital Marketing', 'Agency Guide', 'Company News', 'Case Study']),
     productCategories: cats([...products(), ...staticProducts()], ['Healthcare', 'Real estate', 'Sales', 'Support', 'E-commerce', 'Education', 'Finance']),
+    projectCategories: cats([...projects(), ...staticProjects()], ['Government', 'Mobile App', 'Website', 'E-commerce', 'AI & Automation', 'Retail', 'Healthcare', 'Education']),
   });
 });
 
 api.get('/dashboard', (req, res) => {
-  const b = blogs(), p = products(), media = mediaList();
+  const b = blogs(), p = products(), pr = projects(), media = mediaList();
   const count = (l, s) => l.filter((x) => x.status === s).length;
-  const recent = [...b.map((x) => ({ ...x, _t: 'blog', _n: x.title })), ...p.map((x) => ({ ...x, _t: 'product', _n: x.name }))]
+  const recent = [...b.map((x) => ({ ...x, _t: 'blog', _n: x.title })), ...p.map((x) => ({ ...x, _t: 'product', _n: x.name })), ...pr.map((x) => ({ ...x, _t: 'project', _n: x.title }))]
     .sort((x, y) => String(y.updated_at).localeCompare(String(x.updated_at)))
     .slice(0, 6)
     .map((x) => ({ id: x.id, type: x._t, name: x._n, status: x.status, updated_at: x.updated_at }));
   res.json({
     blogs: { live: count(b, 'published') + staticBlogs().length, drafts: count(b, 'draft'), scheduled: count(b, 'scheduled') },
     products: { live: count(p, 'published') + staticProducts().length, drafts: count(p, 'draft') },
+    projects: { live: count(pr, 'published') + staticProjects().length, drafts: count(pr, 'draft') },
     media: { count: media.length, size: media.reduce((s, m) => s + m.size, 0) },
     activity: dbGet('activity', []).slice(0, 7),
     activityCount: dbGet('activity', []).length,
@@ -209,14 +222,15 @@ api.get('/dashboard', (req, res) => {
 
 /* ---- blogs + products (shared handlers) ---- */
 const TYPES = {
-  blogs: { type: 'blog', store: 'blogs', from: blogFromBody, label: (x) => x.title, need: 'title' },
-  products: { type: 'product', store: 'products', from: productFromBody, label: (x) => x.name, need: 'name' },
+  blogs: { type: 'blog', store: 'blogs', from: blogFromBody, label: (x) => x.title, need: 'title', needMsg: 'Title zaroori hai.', pages: true, sort: sortedBlogs, original: staticBlogs },
+  products: { type: 'product', store: 'products', from: productFromBody, label: (x) => x.name, need: 'name', needMsg: 'Product name zaroori hai.', pages: true, sort: sortedProducts, original: staticProducts },
+  // projects = sirf /portfolio par card (alag page nahi banta)
+  projects: { type: 'project', store: 'projects', from: projectFromBody, label: (x) => x.title, need: 'title', needMsg: 'Project ka title zaroori hai.', pages: false, sort: sortedProjects, original: staticProjects },
 };
 
 for (const [route, T] of Object.entries(TYPES)) {
   api.get(`/${route}`, (req, res) => {
-    const list = T.type === 'blog' ? sortedBlogs(dbGet(T.store, [])) : sortedProducts(dbGet(T.store, []));
-    res.json({ items: list, original: T.type === 'blog' ? staticBlogs() : staticProducts() });
+    res.json({ items: T.sort(dbGet(T.store, [])), original: T.original() });
   });
 
   api.get(`/${route}/:id`, (req, res) => {
@@ -228,9 +242,9 @@ for (const [route, T] of Object.entries(TYPES)) {
     const list = dbGet(T.store, []);
     const old = req.body.id ? list.find((x) => x.id === req.body.id) : null;
     const item = T.from(req.body, old, req.user.username);
-    if (!item[T.need]) throw new Error(T.type === 'blog' ? 'Title zaroori hai.' : 'Product name zaroori hai.');
+    if (!item[T.need]) throw new Error(T.needMsg);
     item.slug = uniqueSlug(T.type, item.slug, item.id);
-    if (old && old.slug !== item.slug) removePage(T.type, old.slug);
+    if (T.pages && old && old.slug !== item.slug) removePage(T.type, old.slug);
     if (old) list[list.indexOf(old)] = item;
     else list.push(item);
     dbPut(T.store, list);
@@ -243,7 +257,7 @@ for (const [route, T] of Object.entries(TYPES)) {
     const list = dbGet(T.store, []);
     const it = list.find((x) => x.id === req.params.id);
     if (!it) throw new Error('Nahi mila.');
-    removePage(T.type, it.slug);
+    if (T.pages) removePage(T.type, it.slug);
     dbPut(T.store, list.filter((x) => x !== it));
     const warnings = syncType(T.type);
     log(req, `Deleted ${T.type}`, T.label(it));
@@ -292,26 +306,41 @@ api.post('/preview', wrap((req, res) => {
 /* ---- media ---- */
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024, files: 20 } });
 
-api.get('/media', (req, res) => res.json({ items: mediaList().map((m) => ({ ...m, url: '/' + m.path })) }));
+api.get('/media', wrap(async (req, res) => {
+  const local = mediaList().map((m) => ({ ...m, url: '/' + m.path }));
+  let cloud = [];
+  if (cloudEnabled()) {
+    try { cloud = (await cloudList()).map((m) => ({ ...m, url: m.path })); } catch (e) { console.error('[cloudinary] list nahi hui:', e.message); }
+  }
+  res.json({ items: [...cloud, ...local].sort((a, b) => b.mtime - a.mtime) });
+}));
 
 api.post('/media', upload.array('file', 20), wrap(async (req, res) => {
   if (!req.files?.length) throw new Error('Koi file nahi mili.');
   const files = [];
   for (const f of req.files) {
     const p = await saveImage(f);
-    files.push({ path: p, url: '/' + p });
+    files.push({ path: p, url: /^https?:\/\//.test(p) ? p : '/' + p });
   }
   log(req, 'Uploaded image', files.map((f) => f.path).join(', '));
   res.json({ ok: true, files });
 }));
 
-api.delete('/media', wrap((req, res) => {
-  const rel = String(req.query.path || '').replace(/^\/+/, '');
-  if (!rel.startsWith(UPLOAD_REL + '/') || rel.includes('..')) throw new Error('Sirf uploads folder ki images delete ho sakti hain.');
-  const used = [...blogs().filter((b) => JSON.stringify(b).includes(rel)).map((b) => b.title), ...products().filter((p) => JSON.stringify(p).includes(rel)).map((p) => p.name)];
+api.delete('/media', wrap(async (req, res) => {
+  const raw = String(req.query.path || '');
+  const id = cloudId(raw); // Cloudinary image ho to uska public_id, warna null
+  const rel = raw.replace(/^\/+/, '');
+  if (!id && (!rel.startsWith(UPLOAD_REL + '/') || rel.includes('..'))) throw new Error('Sirf uploads ki images delete ho sakti hain.');
+  const key = id || rel;
+  const used = [
+    ...blogs().filter((b) => JSON.stringify(b).includes(key)).map((b) => b.title),
+    ...products().filter((p) => JSON.stringify(p).includes(key)).map((p) => p.name),
+    ...projects().filter((p) => JSON.stringify(p).includes(key)).map((p) => p.title),
+  ];
   if (used.length) throw new Error('Yeh image in me use ho rahi hai: ' + used.join(', ') + '. Pehle wahan se hatayein.');
-  fs.rmSync(path.join(SITE_DIR, rel), { force: true });
-  log(req, 'Deleted image', rel);
+  if (id) await cloudDelete(id);
+  else fs.rmSync(path.join(SITE_DIR, rel), { force: true });
+  log(req, 'Deleted image', id || rel);
   res.json({ ok: true });
 }));
 
@@ -393,7 +422,7 @@ api.get('/backups/download', adminOnly, (req, res) => {
   res.download(abs, file.replace(/\.bak$/, ''));
 });
 
-api.get('/settings', adminOnly, (req, res) => res.json({ ...settings(), version: VERSION, site_dir: SITE_DIR, data_dir: DATA_DIR, serve_site: SERVE_SITE }));
+api.get('/settings', adminOnly, (req, res) => res.json({ ...settings(), version: VERSION, site_dir: SITE_DIR, data_dir: DATA_DIR, serve_site: SERVE_SITE, storage: dbEnabled() ? 'MongoDB' : 'JSON files', db_error: dbLastError() }));
 
 api.post('/settings', adminOnly, wrap((req, res) => {
   const b = req.body;
@@ -419,7 +448,7 @@ api.post('/settings', adminOnly, wrap((req, res) => {
 }));
 
 api.post('/rebuild', adminOnly, wrap((req, res) => {
-  const warnings = [...syncType('blog'), ...syncType('product')];
+  const warnings = [...syncType('blog'), ...syncType('product'), ...syncType('project')];
   log(req, 'Rebuilt all pages');
   res.json({ ok: true, warnings });
 }));
@@ -427,7 +456,7 @@ api.post('/rebuild', adminOnly, wrap((req, res) => {
 api.get('/export', adminOnly, (req, res) => {
   log(req, 'Exported content');
   res.set('Content-Disposition', `attachment; filename="ddadmin-content-${today()}.json"`);
-  res.json({ exported_at: nowIso(), version: VERSION, blogs: blogs(), products: products() });
+  res.json({ exported_at: nowIso(), version: VERSION, blogs: blogs(), products: products(), projects: projects() });
 });
 
 api.post('/import', adminOnly, wrap((req, res) => {
@@ -435,8 +464,9 @@ api.post('/import', adminOnly, wrap((req, res) => {
   if (!Array.isArray(d?.blogs) || !Array.isArray(d?.products)) throw new Error('Yeh valid export file nahi hai.');
   dbPut('blogs', d.blogs);
   dbPut('products', d.products);
-  const warnings = [...syncType('blog'), ...syncType('product')];
-  log(req, 'Imported content', `${d.blogs.length} blogs, ${d.products.length} products`);
+  if (Array.isArray(d.projects)) dbPut('projects', d.projects);
+  const warnings = [...syncType('blog'), ...syncType('product'), ...(Array.isArray(d.projects) ? syncType('project') : [])];
+  log(req, 'Imported content', `${d.blogs.length} blogs, ${d.products.length} products, ${(d.projects || []).length} projects`);
   res.json({ ok: true, warnings });
 }));
 
@@ -508,7 +538,7 @@ try { syncEnvAdmin(); } catch (e) { console.warn('[!] SUPER_ADMIN sync fail:', e
 
 try { recoveryKey(); } catch (e) { console.warn('[!] RECOVERY_KEY set nahi ho paya:', e.message); }
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`\n  Deific Digital Admin v${VERSION}`);
   console.log(`  Admin:   http://localhost:${PORT}/admin/`);
   if (SERVE_SITE) console.log(`  Website: http://localhost:${PORT}/`);
@@ -516,3 +546,12 @@ app.listen(PORT, () => {
   try { runScheduler(); } catch {}
   setInterval(() => { try { runScheduler(); } catch (e) { console.error('[scheduler]', e.message); } }, 30 * 60 * 1000).unref();
 });
+
+// Band hone se pehle pending DB writes poori save karo
+async function shutdown() {
+  server.close();
+  try { await flushDb(); await closeDb(); } catch {}
+  process.exit(0);
+}
+process.on('SIGTERM', shutdown);
+process.on('SIGINT', shutdown);

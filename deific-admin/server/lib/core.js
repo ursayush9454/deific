@@ -4,6 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import 'dotenv/config';
+import { NAMES as DB_NAMES, dbEnabled, cacheGet, cachePut } from './db.js';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const APP_DIR = path.resolve(here, '..', '..');
@@ -20,7 +21,11 @@ for (const d of [DATA_DIR, BACKUP_DIR]) fs.mkdirSync(d, { recursive: true });
 /* ---------------- JSON store ---------------- */
 const dbPath = (name) => path.join(DATA_DIR, name.replace(/[^a-z0-9_]/g, '') + '.json');
 
+// MONGODB_URI set ho to ye 6 collections MongoDB me jaati hain, warna data/*.json files me.
+const inDb = (name) => dbEnabled() && DB_NAMES.includes(name);
+
 export function dbGet(name, def = []) {
+  if (inDb(name)) return cacheGet(name, def);
   try {
     return JSON.parse(fs.readFileSync(dbPath(name), 'utf8'));
   } catch {
@@ -29,6 +34,7 @@ export function dbGet(name, def = []) {
 }
 
 export function dbPut(name, data) {
+  if (inDb(name)) return cachePut(name, data);
   atomicWrite(dbPath(name), JSON.stringify(data, null, 2));
 }
 
@@ -152,6 +158,7 @@ export function backupFile(rel, reason = 'auto') {
 /* ---------------- content ---------------- */
 export const blogs = () => dbGet('blogs', []);
 export const products = () => dbGet('products', []);
+export const projects = () => dbGet('projects', []);
 
 export function mediaList() {
   const out = [];

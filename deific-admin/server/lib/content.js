@@ -2,8 +2,9 @@
 import sanitizeHtml from 'sanitize-html';
 import fs from 'node:fs';
 import path from 'node:path';
-import { slugify, newId, today, nowIso, blogs, products, UPLOAD_DIR, UPLOAD_REL } from './core.js';
+import { slugify, newId, today, nowIso, blogs, products, projects, UPLOAD_DIR, UPLOAD_REL } from './core.js';
 import { slugTakenBySite } from './render.js';
+import { cloudEnabled, cloudUpload } from './cloud.js';
 
 const str = (v, max = 5000) => (typeof v === 'string' ? v.trim().slice(0, max) : '');
 const lines = (v, max = 20) =>
@@ -115,13 +116,64 @@ export function productFromBody(b, old, user) {
   };
 }
 
+
+const hexColor = (v) => (/^#[0-9a-fA-F]{6}$/.test(String(v || '').trim()) ? String(v).trim().toLowerCase() : '');
+
+function cleanUrl(v) {
+  let u = str(v, 300);
+  if (!u) return '';
+  if (!/^[a-z][a-z0-9+.-]*:/i.test(u)) u = 'https://' + u.replace(/^\/+/, '');
+  if (!/^https?:\/\/[^\s"'<>]+$/i.test(u)) return '';
+  return u;
+}
+
+// "70,000 | E-rickshaws registered"  ->  { value, label }
+function statList(v) {
+  return lines(v, 4)
+    .map((l) => {
+      const [value, ...rest] = String(l).split('|');
+      return { value: value.trim().slice(0, 30), label: rest.join('|').trim().slice(0, 60) };
+    })
+    .filter((x) => x.value);
+}
+
+export function projectFromBody(b, old, user) {
+  const title = str(b.title, 160);
+  return {
+    id: old?.id || newId(),
+    title,
+    slug: slugify(str(b.slug, 100) || title),
+    client: str(b.client, 120),
+    category: str(b.category, 80),
+    summary: str(b.summary, 500),
+    image: cleanImagePath(b.image),
+    image_alt: str(b.image_alt, 200),
+    color_from: hexColor(b.color_from),
+    color_to: hexColor(b.color_to),
+    stats: statList(b.stats),
+    techs: lines(b.techs, 10).map((t) => t.slice(0, 30)),
+    subtitle: str(b.subtitle, 200),
+    website: cleanUrl(b.website),
+    case_study: cleanHtml(b.case_study),
+    outcome: str(b.outcome, 1500),
+    status: ['draft', 'published'].includes(b.status) ? b.status : 'draft',
+    sort: Number.parseInt(b.sort, 10) || 0,
+    created_at: old?.created_at || nowIso(),
+    created_by: old?.created_by || user,
+    updated_at: nowIso(),
+  };
+}
+
 /** Unique among admin items and never clashing with original site pages. */
 export function uniqueSlug(type, slug, selfId) {
-  const list = type === 'blog' ? blogs() : products();
+  const list = type === 'blog' ? blogs() : type === 'project' ? projects() : products();
   const base = slug;
   let i = 2;
   for (;;) {
-    const clash = slugTakenBySite(type, slug) || list.some((x) => x.slug === slug && x.id !== selfId) || (type === 'product' && slug === 'prop-ai');
+    // projects have no page of their own: slug is only the #anchor on /portfolio
+    const clash = type === 'project'
+      ? list.some((x) => x.slug === slug && x.id !== selfId)
+      : slugTakenBySite(type, slug) || list.some((x) => x.slug === slug && x.id !== selfId) || (type === 'product' && slug === 'prop-ai');
     if (!clash) return slug;
     slug = `${base}-${i++}`;
   }
@@ -150,6 +202,7 @@ export async function saveImage(file) {
   if (ext === 'svg' || file.mimetype === 'image/svg+xml') {
     const svg = file.buffer.toString('utf8');
     if (/<script|\son\w+\s*=|javascript:/i.test(svg)) throw new Error('Yeh SVG safe nahi hai.');
+    if (cloudEnabled()) return cloudUpload(Buffer.from(svg), base, true);
     const name = uniqueName(dir, base, 'svg');
     fs.writeFileSync(path.join(dir, name), svg);
     return `${UPLOAD_REL}/${sub}/${name}`;
@@ -162,6 +215,7 @@ export async function saveImage(file) {
     : sig.subarray(0, 4).toString() === 'RIFF' && sig.subarray(8, 12).toString() === 'WEBP' ? 'webp'
     : null;
   if (!kind) throw new Error('Sirf JPG, PNG, WebP, GIF ya SVG allowed hai.');
+  if (cloudEnabled()) return cloudUpload(file.buffer, base, kind === 'gif');
 
   if (sharp && kind !== 'gif') {
     try {

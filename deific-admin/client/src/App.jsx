@@ -8,6 +8,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import ItemList from './pages/ItemList.jsx';
 import BlogEdit from './pages/BlogEdit.jsx';
 import ProductEdit from './pages/ProductEdit.jsx';
+import ProjectEdit from './pages/ProjectEdit.jsx';
 import Media from './pages/Media.jsx';
 import Backups from './pages/Backups.jsx';
 import Users from './pages/Users.jsx';
@@ -51,6 +52,9 @@ function Shell() {
         <Route path="/products" element={<ItemList kind="products" />} />
         <Route path="/products/new" element={<ProductEdit />} />
         <Route path="/products/:id" element={<ProductEdit />} />
+        <Route path="/projects" element={<ItemList kind="projects" />} />
+        <Route path="/projects/new" element={<ProjectEdit />} />
+        <Route path="/projects/:id" element={<ProjectEdit />} />
         <Route path="/media" element={<Media />} />
         <Route path="/account" element={<Account />} />
         <Route path="/backups" element={guard(<Backups />)} />

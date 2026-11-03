@@ -41,7 +41,7 @@ export default function useItemForm(kind, makeDefaults, toForm) {
   const set = useCallback((k, v, { silent } = {}) => {
     setForm((f) => {
       const next = { ...f, [k]: v };
-      const src = kind === 'blogs' ? 'title' : 'name';
+      const src = kind === 'products' ? 'name' : 'title';
       if (k === src && !slugLocked.current) next.slug = slugify(v);
       if (k === 'slug') slugLocked.current = !!v;
       return next;
@@ -59,7 +59,7 @@ export default function useItemForm(kind, makeDefaults, toForm) {
       const it = r.item;
       const path = kind === 'blogs' ? 'blog' : 'products';
       notify(
-        it.status === 'published' ? `Live ho gaya! /${path}/${it.slug}`
+        it.status === 'published' ? (kind === 'projects' ? `Live ho gaya! /portfolio par card lag gaya.` : `Live ho gaya! /${path}/${it.slug}`)
           : it.status === 'scheduled' ? `Scheduled: ${it.date} ko publish hoga.`
           : 'Draft save ho gaya.'
       );

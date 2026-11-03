@@ -579,4 +579,7 @@
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
+<!-- ddadmin:start -->
+  <url><loc>https://deificdigital.com/products/review-ninja-pro</loc><lastmod>2026-11-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority><image:image><image:loc>https://deificdigital.com/assets/uploads/2026/11/whatsapp-image-2026-11-02-at-12-40-10-pm.webp</image:loc></image:image></url>
+<!-- ddadmin:end -->
 </urlset>

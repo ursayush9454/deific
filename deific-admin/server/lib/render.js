@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {
   SITE_DIR, DATA_DIR, MANAGED_MARK, settings, esc, niceDate, readMinutes, atomicWrite,
-  backupFile, blogs, products, dbGet, dbPut, today, nowIso, logActivity,
+  backupFile, blogs, products, projects, dbGet, dbPut, today, nowIso, logActivity,
 } from './core.js';
 
 export const REGION_START = '<!-- ddadmin:start -->';
@@ -122,8 +122,15 @@ const icon = (n, cls) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="${cls}" aria-hidden="true">${PATHS[n] || ''}</svg>`;
 
 /* ---------------- original (static) items on the listing pages ---------------- */
+const NAMED_ENT = { middot: '\u00b7', nbsp: ' ', ndash: '\u2013', mdash: '\u2014', rsquo: '\u2019', lsquo: '\u2018', rdquo: '\u201d', ldquo: '\u201c', hellip: '\u2026', bull: '\u2022', amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
 const decode = (s) =>
-  String(s || '').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#x27;|&#039;|&apos;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+  String(s || '')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&(?:#(\d+)|#x([0-9a-f]+)|([a-z]+));/gi, (m, d, x, n) => {
+      if (d || x) { try { return String.fromCodePoint(d ? Number(d) : parseInt(x, 16)); } catch { return m; } }
+      return NAMED_ENT[n.toLowerCase()] ?? m;
+    })
+    .trim();
 
 function stripRegion(html) {
   const a = html.indexOf(REGION_START), b = html.indexOf(REGION_END);
@@ -517,9 +524,113 @@ function rebuildSitemap() {
   }
 }
 
+
+/* ---------------- portfolio projects (cards on /portfolio) ---------------- */
+export const PF_START = '<!-- ddadmin:projects:start -->';
+export const PF_END = '<!-- ddadmin:projects:end -->';
+const PF_FILE = 'portfolio/index.html';
+const PH_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>';
+
+export const sortedProjects = (list) =>
+  [...list].sort((a, b) => (Number(a.sort) || 0) - (Number(b.sort) || 0) || String(a.created_at).localeCompare(String(b.created_at)));
+
+function projectCard(p) {
+  const hasImg = !!p.image;
+  const grad = p.color_from && p.color_to ? ` style="--pg-from:${esc(p.color_from)};--pg-to:${esc(p.color_to)}"` : '';
+  const ph = hasImg && !grad ? '' : ' pg-ph';
+  let h = `<article class="pg-card" id="project-${esc(p.slug)}"><div class="pg-media${ph}"${grad}>`;
+  h += hasImg
+    ? `<img src="${esc(assetSrc(p.image, '../'))}" alt="${esc(p.image_alt || p.title)}" loading="lazy" decoding="async"/>`
+    : PH_SVG;
+  if (p.category) h += `<span class="pg-tag">${esc(p.category)}</span>`;
+  h += '</div><div class="pg-content">';
+  if (p.client) h += `<p class="pg-client">${esc(p.client)}</p>`;
+  h += `<h3 class="pg-title">${esc(p.title)}</h3>`;
+  if (p.summary) h += `<p class="pg-desc">${esc(p.summary)}</p>`;
+  if ((p.stats || []).length) {
+    h += '<ul class="pg-stats">' + p.stats.map((x) => `<li><b>${esc(x.value)}</b>${x.label ? `<span>${esc(x.label)}</span>` : ''}</li>`).join('') + '</ul>';
+  }
+  if ((p.techs || []).length) h += '<ul class="pg-techs">' + p.techs.map((t) => `<li>${esc(t)}</li>`).join('') + '</ul>';
+
+  if (p.subtitle || p.case_study || p.outcome || p.website) {
+    let host = '';
+    try { host = new URL(p.website).hostname.replace(/^www\./, ''); } catch { host = p.website || ''; }
+    h += '<details class="pg-details"><summary><span class="pg-closed">Read case study</span><span class="pg-open">Close case study</span></summary><div class="pg-more">';
+    if (p.subtitle) h += `<p class="pg-more-full pg-sub">${esc(p.subtitle)}</p>`;
+    const meta = [];
+    if (p.client) meta.push(['Client', esc(p.client)]);
+    if (p.category) meta.push(['Category', esc(p.category)]);
+    if (p.website) meta.push(['Website', `<a href="${esc(p.website)}" target="_blank" rel="noopener noreferrer">${esc(host)}</a>`]);
+    if (meta.length) h += '<dl class="pg-more-full pg-meta">' + meta.map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('') + '</dl>';
+    if (p.case_study) h += `<div class="pg-more-full">${relativize(String(p.case_study).replace(/<(\/?)h[23]\b/gi, '<$1h4'), '../')}</div>`;
+    if (p.outcome) h += `<div class="pg-more-full pg-result"><h4>Project Outcome</h4><p>${nl2br(p.outcome)}</p></div>`;
+    h += '<div class="pg-more-full pg-actions"><a class="pg-btn" href="../contact">Discuss a similar project</a>';
+    if (p.website) h += `<a class="pg-btn pg-btn-ghost" href="${esc(p.website)}" target="_blank" rel="noopener noreferrer">Visit website</a>`;
+    h += '</div></div></details>';
+  }
+  return h + '</div></article>';
+}
+
+/** Put the admin-made project cards on /portfolio, just before the "And many more" card. */
+export function rebuildPortfolioListing() {
+  const abs = path.join(SITE_DIR, PF_FILE);
+  if (!fs.existsSync(abs)) throw new Error('portfolio/index.html nahi mila, isliye projects website par nahi lage.');
+  const html = fs.readFileSync(abs, 'utf8');
+  const cards = sortedProjects(published(projects())).map(projectCard).join('\n');
+  const block = PF_START + (cards ? '\n' + cards + '\n' : '') + PF_END;
+  const a = html.indexOf(PF_START), b = html.indexOf(PF_END);
+  let out;
+  if (a !== -1 && b > a) {
+    out = html.slice(0, a) + block + html.slice(b + PF_END.length);
+  } else {
+    if (!cards) return; // kuch add karne ko nahi, page ko chhedo mat
+    const g = html.indexOf('id="project-grid"');
+    if (g === -1) throw new Error('portfolio page me project grid (id="project-grid") nahi mila, isliye cards add nahi hue.');
+    let at = html.indexOf('<!-- ---------- AND MANY MORE', g);
+    if (at === -1) at = html.indexOf('<!-- ================ ADD NEW PROJECT CARDS ABOVE THIS LINE', g);
+    if (at === -1) {
+      const open = html.lastIndexOf('<div', g);
+      at = matchingDivEnd(html, open);
+      if (at === -1) throw new Error('portfolio grid ka structure samajh nahi aaya.');
+    }
+    out = html.slice(0, at) + block + '\n' + html.slice(at);
+  }
+  if (out !== html) {
+    backupFile(PF_FILE, 'before portfolio update');
+    atomicWrite(abs, out);
+  }
+}
+
+/** The hand-written project cards already on the portfolio page (admin never edits these). */
+export function staticProjects() {
+  const f = path.join(SITE_DIR, PF_FILE);
+  if (!fs.existsSync(f)) return [];
+  let html = fs.readFileSync(f, 'utf8');
+  const a = html.indexOf(PF_START), b = html.indexOf(PF_END);
+  if (a !== -1 && b > a) html = html.slice(0, a) + html.slice(b + PF_END.length);
+  html = html.replace(/<!--[\s\S]*?-->/g, '');
+  const out = [];
+  for (const m of html.matchAll(/<article class="pg-card"[^>]*>([\s\S]*?)<\/article>/g)) {
+    const c = m[1];
+    const client = decode((c.match(/<p class="pg-client">([\s\S]*?)<\/p>/) || [])[1]);
+    if (/^and many more$/i.test(client)) continue;
+    out.push({
+      title: decode((c.match(/<h3 class="pg-title">([\s\S]*?)<\/h3>/) || [])[1]),
+      client,
+      category: decode((c.match(/<span class="pg-tag">([\s\S]*?)<\/span>/) || [])[1]),
+      image: ((c.match(/<img[^>]*?\ssrc="([^"]+)"/) || [])[1] || '').replace(/^(\.\.\/)+/, ''),
+    });
+  }
+  return out;
+}
+
 /** Regenerate every admin page of a type + its listing + sitemap. Returns warnings. */
 export function syncType(type) {
   const warn = [];
+  if (type === 'project') {
+    try { rebuildPortfolioListing(); } catch (e) { warn.push(e.message); }
+    return warn;
+  }
   const list = type === 'blog' ? blogs() : products();
   const pub = published(list);
   for (const it of list) {
