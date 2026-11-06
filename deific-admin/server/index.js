@@ -80,7 +80,7 @@ const auth = (req, res, next) => {
 };
 const adminOnly = (req, res, next) => (req.user.role === 'admin' ? next() : res.status(403).json({ error: 'Yeh sirf Admin ke liye hai.' }));
 const log = (req, action, detail = '') => logActivity(req.user?.username, action, detail, ip(req));
-const wrap = (fn) => (req, res) => Promise.resolve(fn(req, res)).catch((e) => res.status(400).json({ error: e.message || 'Error' }));
+const wrap = (fn) => (req, res) => Promise.resolve().then(() => fn(req, res)).catch((e) => { console.error('[api]', req.method, req.originalUrl, '->', e && e.stack || e); res.status(400).json({ error: (e && e.message) || 'Error' }); });
 
 /* ---- login throttling (in memory) ---- */
 const attempts = new Map();
