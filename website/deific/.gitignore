@@ -1,0 +1,14 @@
+# Secrets and runtime data - never commit
+.env
+.env.*
+!.env.example
+deific-admin/data/
+data/
+.secret
+*.pem
+*.key
+
+# Dependencies and build junk
+node_modules/
+*.log
+.DS_Store
