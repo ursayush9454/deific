@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 352" role="img" aria-label="Visitsly: AI visit booking for real estate">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0a1a40"/><stop offset="1" stop-color="#1d4ed8"/></linearGradient>
+<linearGradient id="a" x1="0" x2="1"><stop offset="0" stop-color="#2563eb"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<rect width="640" height="352" fill="url(#g)"/>
+<circle cx="560" cy="40" r="150" fill="#22d3ee" opacity=".16"/>
+<g font-family="Plus Jakarta Sans,Arial,sans-serif">
+<text x="40" y="92" font-size="34" font-weight="800" fill="#fff">Visitsly</text>
+<text x="40" y="122" font-size="15" font-weight="600" fill="#bcd0f1">Visit booking AI for real estate</text>
+<rect x="40" y="150" width="170" height="34" rx="17" fill="#fff" opacity=".12"/><text x="58" y="172" font-size="14" font-weight="700" fill="#fff">3 sec first reply</text>
+<rect x="40" y="194" width="130" height="34" rx="17" fill="#fff" opacity=".12"/><text x="58" y="216" font-size="14" font-weight="700" fill="#fff">24×7 on WhatsApp</text>
+<rect x="340" y="40" width="250" height="272" rx="28" fill="#07122b" stroke="#ffffff" stroke-opacity=".25" stroke-width="2"/>
+<rect x="356" y="62" width="218" height="46" rx="14" fill="#fff" opacity=".1"/><circle cx="378" cy="85" r="14" fill="#22c55e"/><text x="402" y="90" font-size="14" font-weight="700" fill="#fff">Visitsly AI</text>
+<rect x="356" y="124" width="160" height="40" rx="14" fill="url(#a)"/><text x="368" y="149" font-size="13" fill="#fff">Price? Possession?</text>
+<rect x="398" y="176" width="176" height="52" rx="14" fill="#fff" opacity=".12"/><text x="410" y="198" font-size="12" fill="#e3edff">Easy payment plan 🏡</text><text x="410" y="216" font-size="12" fill="#e3edff">Visit Saturday?</text>
+<rect x="356" y="242" width="218" height="52" rx="14" fill="url(#a)"/><text x="372" y="265" font-size="14" font-weight="800" fill="#fff">Visit booked ✓</text><text x="372" y="283" font-size="12" fill="#e3edff">Sat 15 · 11:00 AM</text>
+</g></svg>

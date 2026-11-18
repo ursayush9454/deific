@@ -1,0 +1,48 @@
+/* Products grid: compact cards with a "More" toggle */
+#catalogue .grid.gap-5 { align-items: start; }
+#catalogue .grid.gap-5 > article { height: auto; }
+#catalogue .grid.gap-5 > article > a.relative { height: 9.5rem; }
+#catalogue .grid.gap-5 > article > div.flex-col { padding: 1rem 1.1rem 1.1rem; }
+
+.dd-more-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  transition: grid-template-rows .3s ease, opacity .25s ease, visibility 0s linear .3s;
+}
+.dd-more-body.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows .3s ease, opacity .25s ease, visibility 0s;
+}
+.dd-more-inner { overflow: hidden; min-height: 0; }
+.dd-more-inner > p:first-child { margin-top: 1rem; }
+.dd-more-extra { display: grid; gap: .5rem; margin-top: 1rem; }
+.dd-more-extra > a:last-child { margin-top: .25rem; }
+
+.dd-card-actions { display: grid; gap: .5rem; margin-top: 1rem; }
+.dd-more-body.is-open + .dd-card-actions { margin-top: 1rem; }
+
+.dd-more-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  width: 100%; padding: .65rem .75rem; cursor: pointer;
+  border: 1px solid rgb(220 226 238); border-radius: .75rem; background: #fff;
+  font: inherit; font-size: .875rem; font-weight: 600; color: rgb(18 26 51);
+  transition: border-color .2s, background-color .2s;
+}
+.dd-more-btn:hover { border-color: rgba(17, 26, 51, .3); background: #f7f8fa; }
+.dd-more-btn:focus-visible { outline: 2px solid rgb(215 20 28); outline-offset: 2px; }
+.dd-more-chev { width: 1rem; height: 1rem; transition: transform .25s ease; }
+.dd-more-btn[aria-expanded="true"] .dd-more-chev { transform: rotate(180deg); }
+.dd-more-t--less { display: none; }
+.dd-more-btn[aria-expanded="true"] .dd-more-t--more { display: none; }
+.dd-more-btn[aria-expanded="true"] .dd-more-t--less { display: inline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .dd-more-body, .dd-more-body.is-open, .dd-more-chev { transition: none; }
+}
+
+/* keep the collapsed cards aligned when titles wrap differently */
+#catalogue .grid.gap-5 > article > div.flex-col > div.flex.items-start.gap-3 { min-height: 5.25rem; }

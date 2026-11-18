@@ -2,7 +2,7 @@
 .env
 .env.*
 !.env.example
-deific-admin/data/
+admin/data/
 data/
 .secret
 *.pem
