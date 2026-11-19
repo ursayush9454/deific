@@ -17,6 +17,23 @@
 - [Smart City Solutions](https://deificdigital.com/industries/smart-city-solutions)
 - [Game Development](https://deificdigital.com/services/game-development)
 
+## Services
+- [Business process automation services](https://deificdigital.com/services/business-process-automation)
+- [AI chatbot development](https://deificdigital.com/services/ai-chatbot-development)
+- [AI integration services](https://deificdigital.com/services/ai-integration-services)
+- [Generative AI development](https://deificdigital.com/services/generative-ai-development)
+- [Android app development](https://deificdigital.com/services/android-app-development)
+- [iOS app development](https://deificdigital.com/services/ios-app-development)
+- [Cross-platform app development](https://deificdigital.com/services/cross-platform-app-development)
+- [Hybrid app development](https://deificdigital.com/services/hybrid-app-development)
+- [Mobile game development](https://deificdigital.com/services/game-development)
+- [MVP & SaaS development](https://deificdigital.com/services/mvp-development)
+- [Startup idea validation](https://deificdigital.com/services/startup-idea-validation)
+- [SEO services](https://deificdigital.com/services/seo-services)
+- [Social media marketing](https://deificdigital.com/services/social-media-marketing)
+- [Meta ads agency](https://deificdigital.com/services/meta-ads-agency)
+- [Google Business Profile optimization](https://deificdigital.com/services/google-business-profile-optimization)
+
 ## Products
 - PropAI: WhatsApp AI and CRM for real estate
 - AI Review Ninja Pro: customer reviews and Google Business Profile ranking (https://reviewninjapro.com)

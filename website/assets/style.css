@@ -50,3 +50,25 @@ html[dir=rtl] .site-header>div{gap:1rem}
 .dd-cookie-settings{background:none;border:0;padding:0;margin-left:16px;color:inherit;font:inherit;cursor:pointer}
 [dir="rtl"] .dd-cookie-settings{margin-left:0;margin-right:16px}
 .sd-voice-assistant-sub:empty::after{content:""}
+
+/* ---- SEO content blocks (added) ---- */
+.dd-seo{background:#fff;border-top:1px solid #e6eaf2;padding:56px 16px}
+.dd-seo-wrap{max-width:1000px;margin:0 auto;color:#334155;font-size:16px;line-height:1.75}
+.dd-seo h2,.dd-seo-listh2{font-size:clamp(22px,2.4vw,28px);line-height:1.25;font-weight:700;color:#0b1f4d;margin:0 0 14px}
+.dd-seo-listh2{text-align:center;margin:0 auto 28px;max-width:900px;padding:0 16px}
+.dd-seo h2:not(:first-child){margin-top:40px}
+.dd-seo p{margin:0 0 14px}
+.dd-seo a{color:#d7141c;font-weight:600;text-decoration:none}
+.dd-seo a:hover{text-decoration:underline}
+.dd-seo strong{color:#0b1f4d}
+.dd-seo-faq details{border:1px solid #dce2ee;border-radius:14px;padding:14px 18px;margin-bottom:10px;background:#fbfcfe}
+.dd-seo-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.dd-seo-faq summary::-webkit-details-marker{display:none}
+.dd-seo-faq summary:after{content:"+";color:#d7141c;font-weight:700;font-size:20px;line-height:1}
+.dd-seo-faq details[open] summary:after{content:"\2212"}
+.dd-seo-faq h3{font-size:16px;font-weight:600;color:#0b1f4d;margin:0}
+.dd-seo-faq details p{margin:10px 0 0;color:#4a5578}
+.dd-seo-links{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:0}
+.dd-seo-links a{display:inline-block;border:1px solid #dce2ee;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500;color:#0b1f4d;background:#fff}
+.dd-seo-links a:hover{border-color:#d7141c;color:#d7141c;text-decoration:none}
+[dir=rtl] .dd-seo-wrap{text-align:right}
