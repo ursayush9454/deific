@@ -131,6 +131,13 @@
     <image:image><image:loc>https://deificdigital.com/assets/img/ai-receptionist-clinic-appointment-booking.webp</image:loc><image:title>AI Receptionist</image:title></image:image>
   </url>
   <url>
+    <loc>https://www.deificdigital.com/ai-receptionist-us</loc>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.deificdigital.com/assets/img/dashboard.webp</image:loc><image:title>AI Receptionist for US Dental Clinics</image:title></image:image>
+  </url>
+  <url>
     <loc>https://deificdigital.com/products/ai-sales-agent</loc>
     <lastmod>2026-11-19</lastmod>
     <changefreq>monthly</changefreq>
