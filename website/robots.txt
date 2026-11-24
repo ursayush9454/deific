@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
 Disallow: /deific/
+Disallow: /api/
+# Tracking / parameter URLs (?utm_*, ?fbclid, ?gclid ...) only duplicate the clean URL; no real page uses a query string.
+Disallow: /*?*
 
 
 User-agent: GPTBot

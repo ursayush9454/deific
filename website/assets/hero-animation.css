@@ -298,11 +298,11 @@
 
 @keyframes tech-hover {
   0%, 100% {
-    margin-top: 0;
+    translate: 0 0;
   }
 
   50% {
-    margin-top: -14px;
+    translate: 0 -14px;
   }
 }
 
@@ -320,7 +320,7 @@
 
 @keyframes laser-sweep {
   0% {
-    left: -100%;
+    transform: translateX(0);
     opacity: 0;
   }
 
@@ -333,7 +333,7 @@
   }
 
   100% {
-    left: 100%;
+    transform: translateX(111%);
     opacity: 0;
   }
 }

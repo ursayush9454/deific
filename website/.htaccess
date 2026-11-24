@@ -4,78 +4,80 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-# 1) www -> non-www and force HTTPS (one 301, no loop behind Cloudflare/proxies)
+# 0a) Security: never serve dotfiles (.env, .git) or the admin/duplicate folders
+RewriteRule (^|/)\.(?!well-known/) - [F,L]
+RewriteRule ^(deific|deific-admin|node_modules)(/|$) - [F,L,NC]
+
+# 0) Old / short URLs -> real pages (301). Targets are absolute https://deificdigital.com so http://, www. and old-slug resolve in ONE hop (no chains).
+RewriteRule ^products/prop-ai(/|/index\.html)?$ https://deificdigital.com/propai [NC,L,R=301]
+RewriteRule ^liv-pro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^livpro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^liv_pro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^liv-pro-app/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^products/livpro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^products/liv_pro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^product/liv-pro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^product/livpro/?$ https://deificdigital.com/products/liv-pro [NC,L,R=301]
+RewriteRule ^review-ninja-pro/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^review-ninja/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^reviewninja/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^reviewninjapro/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^products/review-ninja/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^products/reviewninja/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^product/review-ninja-pro/?$ https://deificdigital.com/products/review-ninja-pro [NC,L,R=301]
+RewriteRule ^prop-ai/?$ https://deificdigital.com/propai [NC,L,R=301]
+RewriteRule ^products/propai/?$ https://deificdigital.com/propai [NC,L,R=301]
+RewriteRule ^product/propai/?$ https://deificdigital.com/propai [NC,L,R=301]
+RewriteRule ^product/prop-ai/?$ https://deificdigital.com/propai [NC,L,R=301]
+RewriteRule ^ai-receptionist/?$ https://deificdigital.com/products/ai-receptionist [NC,L,R=301]
+RewriteRule ^ai-sales-agent/?$ https://deificdigital.com/products/ai-sales-agent [NC,L,R=301]
+RewriteRule ^ai-customer-support/?$ https://deificdigital.com/products/ai-customer-support [NC,L,R=301]
+RewriteRule ^product/?$ https://deificdigital.com/products [NC,L,R=301]
+RewriteRule ^service/?$ https://deificdigital.com/services [NC,L,R=301]
+RewriteRule ^industry/?$ https://deificdigital.com/industries [NC,L,R=301]
+RewriteRule ^blogs/?$ https://deificdigital.com/blog [NC,L,R=301]
+RewriteRule ^career/?$ https://deificdigital.com/careers [NC,L,R=301]
+RewriteRule ^jobs/?$ https://deificdigital.com/careers [NC,L,R=301]
+RewriteRule ^contact-us/?$ https://deificdigital.com/contact [NC,L,R=301]
+RewriteRule ^contactus/?$ https://deificdigital.com/contact [NC,L,R=301]
+RewriteRule ^about-us/?$ https://deificdigital.com/about [NC,L,R=301]
+RewriteRule ^aboutus/?$ https://deificdigital.com/about [NC,L,R=301]
+RewriteRule ^privacy/?$ https://deificdigital.com/privacy-policy [NC,L,R=301]
+RewriteRule ^dubai/?$ https://deificdigital.com/uae [NC,L,R=301]
+RewriteRule ^ae/?$ https://deificdigital.com/uae [NC,L,R=301]
+RewriteRule ^ar/?$ https://deificdigital.com/uae/ar [NC,L,R=301]
+RewriteRule ^arabic/?$ https://deificdigital.com/uae/ar [NC,L,R=301]
+RewriteRule ^home/?$ https://deificdigital.com/ [NC,L,R=301]
+
+# 0b) SEO URL optimisation (Nov 2026): old slugs -> new keyword slugs (301)
+RewriteRule ^services/automation(/|/index\.html)?$ https://deificdigital.com/services/business-process-automation [NC,L,R=301]
+RewriteRule ^services/ai-integration-service(/|/index\.html)?$ https://deificdigital.com/services/ai-integration-services [NC,L,R=301]
+RewriteRule ^services/generative-ai-solution(/|/index\.html)?$ https://deificdigital.com/services/generative-ai-development [NC,L,R=301]
+RewriteRule ^services/chatbots-virtual-assistants(/|/index\.html)?$ https://deificdigital.com/services/ai-chatbot-development [NC,L,R=301]
+RewriteRule ^services/google-my-business-optimization(/|/index\.html)?$ https://deificdigital.com/services/google-business-profile-optimization [NC,L,R=301]
+RewriteRule ^services/search-engine-optimization(/|/index\.html)?$ https://deificdigital.com/services/seo-services [NC,L,R=301]
+RewriteRule ^services/meta-ads(/|/index\.html)?$ https://deificdigital.com/services/meta-ads-agency [NC,L,R=301]
+RewriteRule ^terms-and-condition(/|/index\.html)?$ https://deificdigital.com/terms-and-conditions [NC,L,R=301]
+RewriteRule ^terms/?$ https://deificdigital.com/terms-and-conditions [NC,L,R=301]
+RewriteRule ^terms-conditions/?$ https://deificdigital.com/terms-and-conditions [NC,L,R=301]
+RewriteRule ^services/gmb/?$ https://deificdigital.com/services/google-business-profile-optimization [NC,L,R=301]
+RewriteRule ^services/seo/?$ https://deificdigital.com/services/seo-services [NC,L,R=301]
+
+# 1b) Clean URLs: /page/index.html -> /page and /page/ -> /page (one hop, absolute target)
+RewriteCond %{THE_REQUEST} \s/+(.*?)/?index\.html[\s?] [NC]
+RewriteRule ^ https://deificdigital.com/%1 [L,R=301,NE]
+RewriteCond %{REQUEST_URI} ^/(.+)/$
+RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
+RewriteRule ^ https://deificdigital.com/%1 [L,R=301]
+
+# 2) Canonical host: www -> non-www and http -> https (one 301, no loop behind Cloudflare/proxies). Runs AFTER the slug rules so chains never form.
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# 0a) Security: never serve dotfiles (.env, .git) or the admin/duplicate folders
-RewriteRule (^|/)\.(?!well-known/) - [F,L]
-RewriteRule ^(deific|deific-admin|node_modules)(/|$) - [F,L,NC]
-
-# 0) Old / short URLs -> real pages (301). Case-insensitive, with or without trailing slash.
-RewriteRule ^products/prop-ai(/|/index\.html)?$ /propai [NC,L,R=301]
-RewriteRule ^liv-pro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^livpro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^liv_pro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^liv-pro-app/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^products/livpro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^products/liv_pro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^product/liv-pro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^product/livpro/?$ /products/liv-pro [NC,L,R=301]
-RewriteRule ^review-ninja-pro/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^review-ninja/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^reviewninja/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^reviewninjapro/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^products/review-ninja/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^products/reviewninja/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^product/review-ninja-pro/?$ /products/review-ninja-pro [NC,L,R=301]
-RewriteRule ^prop-ai/?$ /propai [NC,L,R=301]
-RewriteRule ^products/propai/?$ /propai [NC,L,R=301]
-RewriteRule ^product/propai/?$ /propai [NC,L,R=301]
-RewriteRule ^product/prop-ai/?$ /propai [NC,L,R=301]
-RewriteRule ^ai-receptionist/?$ /products/ai-receptionist [NC,L,R=301]
-RewriteRule ^ai-sales-agent/?$ /products/ai-sales-agent [NC,L,R=301]
-RewriteRule ^ai-customer-support/?$ /products/ai-customer-support [NC,L,R=301]
-RewriteRule ^product/?$ /products [NC,L,R=301]
-RewriteRule ^service/?$ /services [NC,L,R=301]
-RewriteRule ^industry/?$ /industries [NC,L,R=301]
-RewriteRule ^blogs/?$ /blog [NC,L,R=301]
-RewriteRule ^career/?$ /careers [NC,L,R=301]
-RewriteRule ^jobs/?$ /careers [NC,L,R=301]
-RewriteRule ^contact-us/?$ /contact [NC,L,R=301]
-RewriteRule ^contactus/?$ /contact [NC,L,R=301]
-RewriteRule ^about-us/?$ /about [NC,L,R=301]
-RewriteRule ^aboutus/?$ /about [NC,L,R=301]
-RewriteRule ^privacy/?$ /privacy-policy [NC,L,R=301]
-RewriteRule ^dubai/?$ /uae [NC,L,R=301]
-RewriteRule ^ae/?$ /uae [NC,L,R=301]
-RewriteRule ^ar/?$ /uae/ar [NC,L,R=301]
-RewriteRule ^arabic/?$ /uae/ar [NC,L,R=301]
-RewriteRule ^home/?$ / [NC,L,R=301]
-
-# 0b) SEO URL optimisation (Nov 2026): old slugs -> new keyword slugs (301)
-RewriteRule ^services/automation(/|/index\.html)?$ /services/business-process-automation [NC,L,R=301]
-RewriteRule ^services/ai-integration-service(/|/index\.html)?$ /services/ai-integration-services [NC,L,R=301]
-RewriteRule ^services/generative-ai-solution(/|/index\.html)?$ /services/generative-ai-development [NC,L,R=301]
-RewriteRule ^services/chatbots-virtual-assistants(/|/index\.html)?$ /services/ai-chatbot-development [NC,L,R=301]
-RewriteRule ^services/google-my-business-optimization(/|/index\.html)?$ /services/google-business-profile-optimization [NC,L,R=301]
-RewriteRule ^services/search-engine-optimization(/|/index\.html)?$ /services/seo-services [NC,L,R=301]
-RewriteRule ^services/meta-ads(/|/index\.html)?$ /services/meta-ads-agency [NC,L,R=301]
-RewriteRule ^terms-and-condition(/|/index\.html)?$ /terms-and-conditions [NC,L,R=301]
-RewriteRule ^terms/?$ /terms-and-conditions [NC,L,R=301]
-RewriteRule ^terms-conditions/?$ /terms-and-conditions [NC,L,R=301]
-RewriteRule ^services/gmb/?$ /services/google-business-profile-optimization [NC,L,R=301]
-RewriteRule ^services/seo/?$ /services/seo-services [NC,L,R=301]
-
-# 1b) Clean URLs: /page/index.html -> /page and /page/ -> /page (301), serve /page from /page/index.html
-RewriteCond %{THE_REQUEST} \s/+(.*?)/?index\.html[\s?] [NC]
-RewriteRule ^ /%1 [L,R=301,NE]
-RewriteCond %{REQUEST_URI} ^/(.+)/$
-RewriteCond %{DOCUMENT_ROOT}/%1/index.html -f
-RewriteRule ^ /%1 [L,R=301]
+# 3) Serve /page from /page/index.html (internal, no redirect)
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_FILENAME}/index.html -f
 RewriteRule ^(.+)$ $1/index.html [L]

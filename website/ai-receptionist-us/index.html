@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#0B1F4D" />
     <link
       rel="canonical"
-      href="https://www.deificdigital.com/ai-receptionist-us"
+      href="https://deificdigital.com/ai-receptionist-us"
     />
     <meta property="og:type" content="product" />
     <meta property="og:locale" content="en_US" />
@@ -26,19 +26,14 @@
     />
     <meta
       property="og:url"
-      content="https://www.deificdigital.com/ai-receptionist-us"
+      content="https://deificdigital.com/ai-receptionist-us"
     />
     <meta
       property="og:image"
-      content="https://www.deificdigital.com/assets/img/dashboard.webp"
+      content="https://deificdigital.com/assets/img/dashboard.webp"
     />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -53,7 +48,7 @@
             "publisher": {
               "@type": "Organization",
               "name": "Deific Digital",
-              "url": "https://www.deificdigital.com",
+              "url": "https://deificdigital.com",
               "email": "hello@deificdigital.com",
               "telephone": "+1-771-222-1044"
             }
@@ -91,6 +86,10 @@
       }
     </script>
     <style>
+/* Self-hosted Plus Jakarta Sans + metric-matched fallback (no Google Fonts request, no font-swap layout shift) */
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plus Jakarta Sans Fallback";src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");size-adjust:103.26%;ascent-override:100.53%;descent-override:21.5%;line-gap-override:0%}
+
       :root {
         --bg: #050a16;
         --bg2: #08101f;
@@ -121,6 +120,7 @@
       body {
         font-family:
           "Plus Jakarta Sans",
+          "Plus Jakarta Sans Fallback",
           system-ui,
           -apple-system,
           "Segoe UI",
@@ -1142,9 +1142,9 @@
   <body>
     <header class="hdr">
       <div class="wrap">
-        <a class="brand" href="https://www.deificdigital.com/"
+        <a class="brand" href="https://deificdigital.com/"
           ><img
-            src="https://www.deificdigital.com/logo.webp"
+            src="https://deificdigital.com/logo.webp"
             onerror="
               this.onerror = null;
               this.src =
@@ -1156,8 +1156,8 @@
           /><span>Deific <b>Digital</b></span></a
         >
         <nav class="nav">
-          <a href="https://www.deificdigital.com/">Home</a>
-          <a href="https://www.deificdigital.com/products">Products</a>
+          <a href="https://deificdigital.com/">Home</a>
+          <a href="https://deificdigital.com/products">Products</a>
           <a href="#how">How it works</a>
           <a href="#faq">FAQ</a>
           <a href="#contact">Contact</a>
@@ -1172,7 +1172,7 @@
     <section class="hero">
       <div class="wrap">
         <div class="crumb">
-          <a href="https://www.deificdigital.com/products">Products</a> / AI
+          <a href="https://deificdigital.com/products">Products</a> / AI
           Receptionist (US)
         </div>
         <div class="hero-g">
@@ -1839,7 +1839,7 @@
           </h2>
         </div>
         <div class="more">
-          <a class="reveal" href="https://www.deificdigital.com/products"
+          <a class="reveal" href="https://deificdigital.com/products"
             ><h3>PropAI</h3>
             <p>
               WhatsApp AI agent for real estate that scores leads and books site
@@ -1847,7 +1847,7 @@
             </p>
             <span>Learn more →</span></a
           >
-          <a class="reveal" href="https://www.deificdigital.com/products"
+          <a class="reveal" href="https://deificdigital.com/products"
             ><h3>AI Sales Agent</h3>
             <p>
               Follows up with every lead by call, text and email until they
@@ -1857,7 +1857,7 @@
           >
           <a
             class="reveal"
-            href="https://www.deificdigital.com/products/liv-pro"
+            href="https://deificdigital.com/products/liv-pro"
             ><h3>LIVpro</h3>
             <p>
               Ready-to-launch live streaming app with gifts, rooms and creator
@@ -1875,10 +1875,10 @@
           <div>
             <a
               class="brand"
-              href="https://www.deificdigital.com/"
+              href="https://deificdigital.com/"
               style="color: var(--text)"
               ><img
-                src="https://www.deificdigital.com/logo.webp"
+                src="https://deificdigital.com/logo.webp"
                 onerror="
                   this.onerror = null;
                   this.src =
@@ -1922,8 +1922,8 @@
         <div class="fb">
           <span>© 2026 Deific Digital. All rights reserved.</span
           ><span
-            ><a href="https://www.deificdigital.com/terms">Terms</a> ·
-            <a href="https://www.deificdigital.com/privacy">Privacy</a></span
+            ><a href="https://deificdigital.com/terms-and-conditions">Terms</a> ·
+            <a href="https://deificdigital.com/privacy-policy">Privacy</a></span
           >
         </div>
       </div>
