@@ -20,6 +20,7 @@
 ## Services
 - [Business process automation services](https://deificdigital.com/services/business-process-automation)
 - [AI chatbot development](https://deificdigital.com/services/ai-chatbot-development)
+- [WhatsApp business automation](https://deificdigital.com/services/whatsapp-business-automation)
 - [AI integration services](https://deificdigital.com/services/ai-integration-services)
 - [Generative AI development](https://deificdigital.com/services/generative-ai-development)
 - [Android app development](https://deificdigital.com/services/android-app-development)

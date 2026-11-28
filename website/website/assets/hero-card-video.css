@@ -1,0 +1,29 @@
+/* Video background for the hero "Your business today" card.
+   Visible and playing only while Auto mode is on. */
+.dd-card-bg {
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+.dd-card-vid-host.dd-vid-on .dd-card-bg { opacity: 1; }
+.dd-card-bg video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+/* navy shade keeps the text readable over the video */
+.dd-card-bg-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,31,77,.72) 0%, rgba(11,31,77,.52) 45%, rgba(11,31,77,.82) 100%);
+}
+/* card content sits above the video (absolute children, e.g. the bottom fade, are left alone) */
+.dd-card-vid-host > *:not(.dd-card-bg):not(.absolute) { position: relative; z-index: 1; }
+.dd-card-vid-host > .absolute:not(.dd-card-bg) { z-index: 2; }
+@media (prefers-reduced-motion: reduce) {
+  .dd-card-bg { display: none; }
+}

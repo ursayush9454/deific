@@ -1,0 +1,145 @@
+/* ==========================================================================
+   PORTFOLIO – PROJECT GRID   (sirf portfolio/index.html par load hota hai)
+   Sab classes "pg-" se shuru hoti hain taaki site ke baaki CSS se na takraye.
+
+   Grid apne aap responsive hai: mobile = 1 column, tablet = 2, desktop = 3.
+   15, 30 ya usse zyada projects add karoge to bhi layout nahi bigdega.
+   Colors badalne ho to neeche --pg-accent / --pg-ink change karo.
+   ========================================================================== */
+
+.pg {
+  --pg-accent: #dc2626;
+  --pg-accent-dark: #b91c1c;
+  --pg-ink: #111827;
+  --pg-text: #4b5563;
+  --pg-line: #eceef2;
+  --pg-navy: #0b1f4d;
+  padding: 3rem 1rem 4rem;
+}
+@media (min-width: 640px)  { .pg { padding-inline: 1.5rem; } }
+@media (min-width: 1024px) { .pg { padding-inline: 2rem; } }
+
+.pg-container { max-width: 80rem; margin-inline: auto; }
+
+.pg-head { text-align: center; max-width: 44rem; margin: 0 auto 2.5rem; }
+.pg-head h2 { margin: 0; font-size: 1.875rem; line-height: 1.2; font-weight: 800; color: var(--pg-ink); }
+@media (min-width: 768px) { .pg-head h2 { font-size: 2.25rem; } }
+.pg-head p { margin: .75rem 0 0; font-size: 1.05rem; line-height: 1.7; color: var(--pg-text); }
+
+/* ---------- THE GRID ---------- */
+.pg-grid {
+  display: grid;
+  gap: 1.5rem;
+  /* jitne columns screen me fit ho jaye (min 20rem chaudai) */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  align-items: stretch;
+}
+
+/* ---------- CARD ---------- */
+.pg-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--pg-line);
+  border-radius: 1.1rem;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(17, 24, 39, .06);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.pg-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(17, 24, 39, .12); }
+
+.pg-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: linear-gradient(135deg, var(--pg-navy), var(--pg-accent));
+  overflow: hidden;
+}
+.pg-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pg-tag {
+  position: absolute; inset-block-start: .75rem; inset-inline-end: .75rem;
+  padding: .25rem .8rem; border-radius: 9999px;
+  font-size: .72rem; font-weight: 700; letter-spacing: .04em;
+  color: #fff; background: rgba(11, 31, 77, .78); border: 1px solid rgba(255, 255, 255, .35);
+  backdrop-filter: blur(4px);
+}
+
+.pg-content { display: flex; flex-direction: column; flex: 1; padding: 1.25rem 1.4rem 1.4rem; min-width: 0; }
+.pg-client { margin: 0 0 .25rem; font-size: .75rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--pg-accent); }
+.pg-title { margin: 0; font-size: 1.2rem; line-height: 1.3; font-weight: 800; color: var(--pg-ink); }
+.pg-desc { margin: .6rem 0 0; font-size: .95rem; line-height: 1.65; color: var(--pg-text); }
+
+.pg-stats { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0 0; padding: 0; list-style: none; }
+.pg-stats li { background: #f9fafb; border: 1px solid var(--pg-line); border-radius: .7rem; padding: .45rem .75rem; line-height: 1.2; }
+.pg-stats b { display: block; font-size: 1rem; font-weight: 800; color: var(--pg-ink); }
+.pg-stats span { font-size: .72rem; color: #6b7280; }
+
+.pg-techs { display: flex; flex-wrap: wrap; gap: .4rem; margin: .9rem 0 0; padding: 0; list-style: none; }
+.pg-techs li { font-size: .72rem; font-weight: 600; color: #374151; background: #f3f4f6; border-radius: 9999px; padding: .2rem .65rem; }
+
+/* ---------- "Read case study" (details/summary, no JavaScript) ---------- */
+.pg-details { margin-top: auto; padding-top: 1.1rem; }
+.pg-details > summary {
+  display: inline-flex; align-items: center; gap: .45rem; cursor: pointer; list-style: none;
+  font-weight: 700; font-size: .95rem; color: var(--pg-accent);
+}
+.pg-details > summary::-webkit-details-marker { display: none; }
+.pg-details > summary::after { content: "+"; font-size: 1.2rem; line-height: 1; }
+.pg-details[open] > summary::after { content: "\2212"; }
+.pg-details > summary:hover { color: var(--pg-accent-dark); }
+.pg-details > summary:focus-visible { outline: 2px solid var(--pg-accent); outline-offset: 3px; border-radius: .3rem; }
+.pg-details .pg-open { display: none; }
+.pg-details[open] .pg-open { display: inline; }
+.pg-details[open] .pg-closed { display: none; }
+
+/* Case study khulne par card poori row le leta hai */
+.pg-card:has(.pg-details[open]) { grid-column: 1 / -1; }
+.pg-card:has(.pg-details[open]):hover { transform: none; }
+@media (min-width: 900px) {
+  .pg-card:has(.pg-details[open]) { flex-direction: row; }
+  .pg-card:has(.pg-details[open]) .pg-media { flex: 0 0 34%; aspect-ratio: auto; min-height: 22rem; }
+}
+
+.pg-more { display: grid; gap: 1.5rem 2.5rem; margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--pg-line); }
+@media (min-width: 1100px) { .pg-more { grid-template-columns: 1fr 1fr; } }
+.pg-more-full { grid-column: 1 / -1; }
+.pg-more h4 { margin: 0 0 .6rem; padding-inline-start: .75rem; border-inline-start: 4px solid var(--pg-accent); font-size: 1.05rem; font-weight: 800; color: var(--pg-ink); }
+.pg-more h4:not(:first-child) { margin-top: 1.5rem; }
+.pg-more p { margin: 0 0 .75rem; font-size: .95rem; line-height: 1.7; color: var(--pg-text); }
+.pg-more ul { margin: 0; padding: 0; list-style: none; }
+.pg-more li { position: relative; margin: 0 0 .6rem; padding-inline-start: 1.4rem; font-size: .95rem; line-height: 1.65; color: var(--pg-text); }
+.pg-more li::before { content: ""; position: absolute; inset-inline-start: 0; top: .6em; width: .5rem; height: .5rem; border-radius: 9999px; background: var(--pg-accent); }
+.pg-more strong { color: var(--pg-ink); }
+.pg-result { background: #fef2f2; border: 1px solid #fecaca; border-radius: 1rem; padding: 1.1rem 1.3rem; }
+.pg-result h4 { margin-top: 0; }
+.pg-result p:last-child { margin-bottom: 0; }
+.pg-result .pg-tagline { font-weight: 700; color: var(--pg-accent-dark); }
+.pg-note { margin: 0; font-size: .78rem; font-style: italic; line-height: 1.6; color: #6b7280; }
+.pg-btn {
+  display: inline-block; padding: .7rem 1.5rem; border-radius: 9999px; text-decoration: none;
+  font-weight: 700; font-size: .95rem; color: #fff; background: var(--pg-accent);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, .25);
+}
+.pg-btn:hover { background: var(--pg-accent-dark); color: #fff; }
+
+@media (prefers-reduced-motion: reduce) { .pg-card { transition: none; } .pg-card:hover { transform: none; } }
+
+/* ---------- Placeholder (jab project ki image na ho) ---------- */
+.pg-media.pg-ph { display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--pg-from, #0b1f4d), var(--pg-to, #dc2626)); }
+.pg-ph svg { width: 26%; max-width: 6rem; height: auto; color: rgba(255, 255, 255, .88); }
+.pg-ph::before, .pg-ph::after { content: ""; position: absolute; border-radius: 9999px; background: rgba(255, 255, 255, .08); }
+.pg-ph::before { width: 9rem; height: 9rem; inset-block-start: -3rem; inset-inline-end: -3rem; }
+.pg-ph::after { width: 6rem; height: 6rem; inset-block-end: -2rem; inset-inline-start: -2rem; }
+.pg-ph svg, .pg-ph .pg-tag { z-index: 1; }
+
+/* ---------- Case study ke andar: subtitle + meta boxes + ghost button ---------- */
+.pg-sub { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--pg-accent); }
+.pg-meta { display: grid; gap: .75rem; margin: 0; padding: 0; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr)); }
+.pg-meta > div { background: #f9fafb; border: 1px solid var(--pg-line); border-radius: .85rem; padding: .75rem 1rem; min-width: 0; }
+.pg-meta dt { margin: 0; font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #6b7280; }
+.pg-meta dd { margin: .25rem 0 0; font-size: .92rem; font-weight: 600; line-height: 1.4; color: var(--pg-ink); overflow-wrap: anywhere; }
+.pg-meta a { color: var(--pg-accent); text-decoration: none; }
+.pg-meta a:hover { text-decoration: underline; }
+.pg-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+.pg-btn-ghost { color: var(--pg-accent); background: #fff; border: 2px solid var(--pg-accent); box-shadow: none; }
+.pg-btn-ghost:hover { color: #fff; background: var(--pg-accent); }

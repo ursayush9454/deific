@@ -1,0 +1,91 @@
+/* Bondty product page: reuses livpro.css layout (.lp-*), with its own indigo/violet theme + CSS phone screens (.bp-*) */
+.bp-page{
+ --lp-bg:#0b0825;
+ --lp-bg-2:#110c33;
+ --lp-surface:#161141;
+ --lp-surface-2:#1e1757;
+ --lp-line:rgba(170,160,255,.16);
+ --lp-line-strong:rgba(190,175,255,.34);
+ --lp-text:#f4f2ff;
+ --lp-muted:#aba6d2;
+ --lp-magenta:#ff6fb5;
+ --lp-violet:#7c5cff;
+ --lp-lilac:#d2c9ff;
+ --lp-grad:linear-gradient(120deg,#7c5cff 0%,#b45cff 55%,#ff6fb5 100%);
+}
+.bp-page .lp-hero::before{background:
+ radial-gradient(48% 52% at 78% 38%,rgba(124,92,255,.45),transparent 70%),
+ radial-gradient(38% 42% at 92% 74%,rgba(255,111,181,.26),transparent 70%),
+ radial-gradient(40% 40% at 8% 6%,rgba(100,80,255,.28),transparent 70%)}
+.bp-page .lp-hero::after{background-image:linear-gradient(rgba(170,160,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(170,160,255,.06) 1px,transparent 1px)}
+.bp-page .lp-btn--primary{box-shadow:0 18px 40px -14px rgba(150,92,255,.65),inset 0 1px 0 rgba(255,255,255,.35)}
+.bp-page .lp-btn--primary:hover{box-shadow:0 24px 48px -14px rgba(150,92,255,.8),inset 0 1px 0 rgba(255,255,255,.4)}
+.bp-page .lp-price i{background:#5be3a1;box-shadow:0 0 0 4px rgba(91,227,161,.22)}
+.bp-page .lp-cluster::before{background:conic-gradient(from 200deg,rgba(124,92,255,.55),rgba(255,111,181,.4),rgba(124,92,255,0),rgba(124,92,255,.55))}
+.bp-page .lp-dev{background:#0f0b2e;box-shadow:0 40px 80px -30px rgba(0,0,0,.9),0 0 0 6px rgba(255,255,255,.03),0 0 60px -10px rgba(124,92,255,.6)}
+.bp-page .lp-walk-sec{background:linear-gradient(180deg,var(--lp-bg) 0%,var(--lp-bg-2) 18%,var(--lp-bg-2) 82%,var(--lp-bg) 100%)}
+.bp-page .lp-stage::before{background:radial-gradient(70% 55% at 50% 38%,rgba(124,92,255,.4),transparent 72%),linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.01))}
+.bp-page .lp-shot-frame{background:#0f0b2e;box-shadow:0 50px 90px -34px #000,0 0 70px -12px rgba(124,92,255,.65)}
+.bp-page .lp-step-img{background:#0f0b2e;box-shadow:0 30px 60px -28px #000,0 0 50px -12px rgba(124,92,255,.55)}
+.bp-page .lp-c-live{background:radial-gradient(60% 90% at 100% 0%,rgba(124,92,255,.34),transparent 70%),linear-gradient(180deg,var(--lp-surface-2),var(--lp-surface))}
+.bp-page .lp-lstep b{box-shadow:0 0 0 8px var(--lp-bg),0 0 36px -4px rgba(124,92,255,.7)}
+.bp-page .lp-who-list li::before{box-shadow:0 0 16px rgba(180,92,255,.7)}
+.bp-page .lp-final-box{background:radial-gradient(60% 120% at 50% 120%,rgba(255,111,181,.4),transparent 70%),radial-gradient(50% 100% at 0% 0%,rgba(124,92,255,.5),transparent 70%),var(--lp-surface)}
+.bp-page .lp-more-grid img{background:#1e1757}
+.bp-page .lp-c-region{background:var(--lp-grad)}
+.bp-page .lp-c-region h3,.bp-page .lp-c-region p{color:#fff}
+.bp-page .lp-note{margin:28px 0 0;font-size:.8125rem;color:var(--lp-muted);max-width:60ch}
+.bp-page .lp-disclaimer{margin:20px auto 0;max-width:60ch;font-size:.8125rem;line-height:1.6;color:#b9b3dd}
+.bp-page .lp-launch-note{margin:56px auto 0;text-align:center;font-size:.9375rem;color:var(--lp-muted)}
+
+/* ---------- CSS phone screens (scale with their frame via container units) ---------- */
+.bp-screen{container-type:inline-size;position:relative;display:flex;flex-direction:column;aspect-ratio:9/19;width:100%;overflow:hidden;
+ background:linear-gradient(180deg,#14103a 0%,#0d0929 100%);color:#f4f2ff;font-family:"Plus Jakarta Sans",system-ui,sans-serif;line-height:1.3;text-align:left}
+/* cqw resolves against the nearest ancestor container, so base size goes on the children */
+.bp-screen>*{font-size:4.2cqw}
+.bp-screen *{box-sizing:border-box;margin:0}
+.bp-sb{display:flex;justify-content:space-between;padding:3.4cqw 7cqw 0;font-size:3.3cqw;font-weight:700;opacity:.75}
+.bp-hd{display:flex;align-items:center;justify-content:space-between;padding:4cqw 6cqw 3cqw}
+.bp-hd b{font-size:6cqw;font-weight:800;letter-spacing:-.02em}
+.bp-pill{padding:1.2cqw 3cqw;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(190,175,255,.25);font-size:3.2cqw;font-weight:700;color:#d2c9ff}
+.bp-body{flex:1;display:flex;flex-direction:column;gap:3cqw;padding:0 5.5cqw 5cqw;min-height:0}
+.bp-grad{background:linear-gradient(120deg,#7c5cff,#b45cff 55%,#ff6fb5);color:#fff}
+.bp-card{padding:3.6cqw;border-radius:4cqw;background:rgba(255,255,255,.06);border:1px solid rgba(190,175,255,.16)}
+.bp-btn{display:grid;place-items:center;padding:3.4cqw;border-radius:3.6cqw;font-weight:800;font-size:4cqw}
+.bp-muted{color:#aba6d2;font-size:3.3cqw}
+.bp-av{flex:none;display:grid;place-items:center;width:10.5cqw;height:10.5cqw;border-radius:50%;font-weight:800;font-size:4.6cqw;color:#fff;background:linear-gradient(135deg,#7c5cff,#ff6fb5)}
+.bp-av--b{background:linear-gradient(135deg,#3fa9ff,#7c5cff)}
+.bp-av--c{background:linear-gradient(135deg,#ff9a5c,#ff6fb5)}
+.bp-row{display:flex;align-items:center;gap:3cqw}
+.bp-grow{flex:1;min-width:0}
+.bp-name{font-weight:800;font-size:4cqw}
+.bp-rate{font-weight:800;font-size:3.8cqw;color:#5be3a1;white-space:nowrap}
+.bp-dot{display:inline-block;width:2.2cqw;height:2.2cqw;border-radius:50%;background:#5be3a1;margin-right:1.4cqw;box-shadow:0 0 0 1cqw rgba(91,227,161,.2)}
+.bp-chips{display:flex;flex-wrap:wrap;gap:2cqw}
+.bp-chip{padding:1.3cqw 3cqw;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(190,175,255,.22);font-size:3.1cqw;font-weight:700;color:#d2c9ff}
+.bp-chip--on{background:linear-gradient(120deg,#7c5cff,#b45cff);border-color:transparent;color:#fff}
+.bp-bub{max-width:82%;padding:3cqw 3.6cqw;border-radius:4cqw;font-size:3.7cqw;line-height:1.45}
+.bp-bub--in{align-self:flex-start;background:rgba(255,255,255,.09);border-top-left-radius:1.2cqw}
+.bp-bub--out{align-self:flex-end;background:linear-gradient(120deg,#7c5cff,#b45cff);border-top-right-radius:1.2cqw}
+.bp-typing{align-self:flex-start;display:flex;gap:1.4cqw;padding:3cqw 3.6cqw;border-radius:4cqw;background:rgba(255,255,255,.09)}
+.bp-typing i{width:1.8cqw;height:1.8cqw;border-radius:50%;background:#aba6d2;opacity:.7}
+.bp-typing i:nth-child(2){opacity:.5}.bp-typing i:nth-child(3){opacity:.3}
+.bp-input{margin-top:auto;display:flex;align-items:center;gap:2.5cqw}
+.bp-field{flex:1;padding:3.2cqw 4cqw;border-radius:99px;background:rgba(255,255,255,.07);border:1px solid rgba(190,175,255,.2);font-size:3.5cqw;color:#aba6d2}
+.bp-send{display:grid;place-items:center;width:10cqw;height:10cqw;border-radius:50%;font-weight:800}
+.bp-otp{display:flex;gap:3cqw}
+.bp-otp span{flex:1;display:grid;place-items:center;aspect-ratio:1;border-radius:3.4cqw;background:rgba(255,255,255,.07);border:1px solid rgba(190,175,255,.25);font-size:6cqw;font-weight:800}
+.bp-otp span.on{border-color:#b45cff;box-shadow:0 0 0 .8cqw rgba(180,92,255,.3)}
+.bp-logo{display:grid;place-items:center;width:17cqw;height:17cqw;border-radius:5cqw;font-size:9cqw;font-weight:800}
+.bp-pack{display:flex;align-items:center;justify-content:space-between;padding:3.4cqw 4cqw;border-radius:3.6cqw;background:rgba(255,255,255,.06);border:1px solid rgba(190,175,255,.2);font-weight:800}
+.bp-pack small{padding:1cqw 2.4cqw;border-radius:99px;background:rgba(255,111,181,.18);color:#ff9fcf;font-size:2.9cqw;font-weight:800}
+.bp-pack--on{border-color:#b45cff;background:rgba(124,92,255,.22)}
+.bp-room{display:flex;flex-direction:column;gap:2cqw;padding:3.6cqw;border-radius:4cqw;border:1px solid rgba(190,175,255,.18);background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(255,111,181,.16))}
+.bp-room--b{background:linear-gradient(135deg,rgba(63,169,255,.28),rgba(124,92,255,.2))}
+.bp-free{padding:.9cqw 2.4cqw;border-radius:99px;background:#5be3a1;color:#07241a;font-size:2.9cqw;font-weight:800}
+.bp-seats{display:flex}
+.bp-seats i{width:7cqw;height:7cqw;margin-right:-2cqw;border-radius:50%;border:.7cqw solid #1a1450;background:linear-gradient(135deg,#7c5cff,#ff6fb5)}
+.bp-seats i:nth-child(2){background:linear-gradient(135deg,#3fa9ff,#7c5cff)}
+.bp-seats i:nth-child(3){background:linear-gradient(135deg,#ff9a5c,#ff6fb5)}
+.bp-nav{display:flex;justify-content:space-around;padding:3cqw 4cqw 4.5cqw;border-top:1px solid rgba(190,175,255,.14);font-size:3cqw;font-weight:700;color:#aba6d2}
+.bp-nav .on{color:#fff}

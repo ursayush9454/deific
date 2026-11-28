@@ -1,0 +1,38 @@
+User-agent: *
+Allow: /
+Disallow: /deific/
+Disallow: /api/
+# Tracking / parameter URLs (?utm_*, ?fbclid, ?gclid ...) only duplicate the clean URL; no real page uses a query string.
+Disallow: /*?*
+
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+Sitemap: https://deificdigital.com/sitemap.xml

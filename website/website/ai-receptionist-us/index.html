@@ -1,0 +1,2007 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Receptionist for US Dental Clinics | Deific Digital</title>
+    <meta
+      name="description"
+      content="A 24/7 AI receptionist for US dental clinics. Answers every call, books appointments, rebooks no-shows and collects feedback. Built for HIPAA. Call the live demo: +1 (771) 222-1044."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B1F4D" />
+    <link
+      rel="canonical"
+      href="https://deificdigital.com/ai-receptionist-us"
+    />
+    <meta property="og:type" content="product" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      property="og:title"
+      content="AI Receptionist for US Dental Clinics | Deific Digital"
+    />
+    <meta
+      property="og:description"
+      content="Never miss a patient call. Answers 24/7, books appointments, rebooks no-shows. Call the live demo: +1 (771) 222-1044."
+    />
+    <meta
+      property="og:url"
+      content="https://deificdigital.com/ai-receptionist-us"
+    />
+    <meta
+      property="og:image"
+      content="https://deificdigital.com/assets/img/dashboard.webp"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preload" href="/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "SoftwareApplication",
+            "name": "AI Receptionist for Dental Clinics",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Web, iOS, Android",
+            "areaServed": "US",
+            "description": "24/7 AI receptionist for dental clinics: answers calls, books appointments, rebooks no-shows, collects feedback, with a built-in CRM and daily reports.",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Deific Digital",
+              "url": "https://deificdigital.com",
+              "email": "hello@deificdigital.com",
+              "telephone": "+1-771-222-1044"
+            }
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What does the AI receptionist do?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It answers your clinic's phone 24/7, books and reschedules appointments, captures every inquiry as a lead, calls no-shows to rebook and calls patients for feedback."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I keep my clinic's phone number?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Calls are forwarded from your current number, for example only when the front desk doesn't pick up or after hours."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is it HIPAA compliant?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It is built for HIPAA with encryption, two-factor login, audit logs and auto logoff. We sign a BAA with your clinic."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <style>
+/* Self-hosted Plus Jakarta Sans + metric-matched fallback (no Google Fonts request, no font-swap layout shift) */
+@font-face{font-family:"Plus Jakarta Sans";font-style:normal;font-weight:200 800;font-display:swap;src:url(/assets/fonts/plus-jakarta-sans-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+2074,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Plus Jakarta Sans Fallback";src:local("Arial"),local("Helvetica Neue"),local("Liberation Sans");size-adjust:103.26%;ascent-override:100.53%;descent-override:21.5%;line-gap-override:0%}
+
+      :root {
+        --bg: #050a16;
+        --bg2: #08101f;
+        --surface: #0b1527;
+        --surface2: #111e36;
+        --line: rgba(140, 190, 255, 0.14);
+        --line2: rgba(150, 200, 255, 0.3);
+        --text: #f2f7ff;
+        --muted: #9fb0cc;
+        --soft: #a9dcff;
+        --cyan: #22d3ee;
+        --blue: #3b82f6;
+        --indigo: #6366f1;
+        --green: #22c55e;
+        --grad: linear-gradient(120deg, #22d3ee 0%, #3b82f6 55%, #6366f1 100%);
+        --r: 24px;
+        --red: #d7141c;
+        --ink: #121a33;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          "Plus Jakarta Sans",
+          "Plus Jakarta Sans Fallback",
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+        overflow-x: clip;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      .sec {
+        padding: 112px 0;
+        position: relative;
+      }
+      .h2 {
+        font-size: clamp(2rem, 4.2vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        font-weight: 800;
+        max-width: 18ch;
+        text-wrap: balance;
+      }
+      .lead {
+        font-size: 1.125rem;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 56ch;
+        margin-top: 20px;
+      }
+      .head {
+        margin-bottom: 64px;
+      }
+      .head.c {
+        text-align: center;
+      }
+      .head.c .h2,
+      .head.c .lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .grad-t {
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      /* buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 52px;
+        padding: 0 26px;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        transition:
+          transform 0.2s,
+          box-shadow 0.25s,
+          border-color 0.25s,
+          background 0.25s;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .btn svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn-p {
+        background: var(--grad);
+        color: #fff;
+        box-shadow: 0 14px 40px -12px rgba(59, 130, 246, 0.75);
+      }
+      .btn-p:hover {
+        box-shadow: 0 18px 50px -10px rgba(34, 211, 238, 0.7);
+      }
+      .btn-g {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--line2);
+        color: var(--text);
+      }
+      .btn-g:hover {
+        border-color: var(--soft);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      /* site header (matches deificdigital.com) */
+      .hdr {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #eceef3;
+      }
+      .hdr .wrap {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        height: 69px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 21px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .brand img {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+      }
+      .brand b {
+        color: var(--red);
+        font-weight: 600;
+      }
+      .nav {
+        display: flex;
+        gap: 26px;
+        font-size: 15px;
+        font-weight: 500;
+        color: #3a4256;
+      }
+      .nav a:hover {
+        color: var(--red);
+      }
+      .hdr .acts {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .hdr .tel {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ink);
+        padding: 9px 14px;
+        border-radius: 12px;
+        background: #f2f4f8;
+      }
+      .hdr .cta {
+        white-space: nowrap;
+        background: var(--red);
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 11px 18px;
+        border-radius: 12px;
+      }
+      /* hero */
+      .hero {
+        padding: 72px 0 96px;
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            900px 600px at 78% 30%,
+            rgba(59, 130, 246, 0.22),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px 500px at 10% 0%,
+            rgba(34, 211, 238, 0.12),
+            transparent 60%
+          ),
+          var(--bg);
+      }
+      .crumb {
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+      .crumb a {
+        color: var(--soft);
+      }
+      .hero-g {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 40px;
+        align-items: center;
+      }
+      .hero h1 {
+        font-size: clamp(2.6rem, 5.6vw, 4.4rem);
+        line-height: 1.04;
+        letter-spacing: -0.035em;
+        font-weight: 800;
+        margin: 22px 0 22px;
+        text-wrap: balance;
+      }
+      .hero .sub {
+        font-size: 1.1875rem;
+        line-height: 1.7;
+        color: #c3d0e6;
+        max-width: 52ch;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 26px 0 30px;
+        padding: 9px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line2);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--soft);
+      }
+      .chip i {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+        animation: pulse 1.8s infinite;
+      }
+      @keyframes pulse {
+        50% {
+          box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+        }
+      }
+      .stats {
+        display: flex;
+        gap: 28px;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .stats div b {
+        display: block;
+        font-size: 1.6rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .stats div span {
+        font-size: 0.875rem;
+        color: var(--muted);
+      }
+      .cluster {
+        position: relative;
+        height: 620px;
+        max-width: 540px;
+        margin-left: auto;
+        width: 100%;
+      }
+      .cluster:before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 440px;
+        height: 440px;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: conic-gradient(
+          from 200deg,
+          rgba(34, 211, 238, 0.5),
+          rgba(99, 102, 241, 0.5),
+          rgba(34, 211, 238, 0),
+          rgba(34, 211, 238, 0.5)
+        );
+        filter: blur(60px);
+        opacity: 0.75;
+      }
+      .dev {
+        position: absolute;
+        border-radius: 34px;
+        filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 0 40px rgba(59, 130, 246, 0.35));
+      }
+      .dev-a {
+        width: 220px;
+        left: 0;
+        top: 110px;
+        transform: rotate(-7deg);
+        z-index: 1;
+        opacity: 0.92;
+      }
+      .dev-b {
+        width: 260px;
+        left: 50%;
+        top: 20px;
+        transform: translateX(-50%);
+        z-index: 3;
+      }
+      .dev-c {
+        width: 220px;
+        right: 0;
+        top: 120px;
+        transform: rotate(7deg);
+        z-index: 2;
+        opacity: 0.92;
+      }
+      .live {
+        position: absolute;
+        z-index: 4;
+        left: 50%;
+        bottom: 6px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 14px 20px 14px 14px;
+        border-radius: 20px;
+        background: rgba(11, 21, 39, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--line2);
+        box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+        white-space: nowrap;
+      }
+      .live .ic {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--green);
+        display: grid;
+        place-items: center;
+        box-shadow: 0 0 0 6px rgba(34, 197, 94, 0.15);
+      }
+      .live small {
+        display: block;
+        font-size: 0.75rem;
+        color: var(--muted);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .live b {
+        font-size: 1.15rem;
+      }
+      /* walkthrough */
+      .walk-sec {
+        background: linear-gradient(
+          180deg,
+          var(--bg) 0%,
+          var(--bg2) 18%,
+          var(--bg2) 82%,
+          var(--bg) 100%
+        );
+      }
+      .walk {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 64px;
+      }
+      .stage-col {
+        position: relative;
+      }
+      .stage {
+        position: sticky;
+        top: 120px;
+        height: min(560px, 70vh);
+        display: flex;
+        align-items: center;
+      }
+      .shot {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+        transition:
+          opacity 0.5s,
+          transform 0.5s;
+      }
+      .shot.on {
+        opacity: 1;
+        transform: none;
+      }
+      .win {
+        width: 100%;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line2);
+        background: #0b1220;
+        box-shadow:
+          0 40px 80px -30px rgba(0, 0, 0, 0.9),
+          0 0 70px -20px rgba(59, 130, 246, 0.5);
+      }
+      .win .bar {
+        height: 34px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 14px;
+        background: #0f1a2e;
+        border-bottom: 1px solid var(--line);
+      }
+      .win .bar i {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #2b3a55;
+      }
+      .win img {
+        width: 100%;
+        aspect-ratio: 16/10;
+        object-fit: cover;
+        object-position: top left;
+      }
+      .shot .ph {
+        width: 260px;
+        filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.6))
+          drop-shadow(0 0 50px rgba(59, 130, 246, 0.4));
+      }
+      .steps {
+        border-left: 1px solid var(--line);
+      }
+      .step {
+        min-height: 72vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 40px;
+        position: relative;
+        opacity: 0.35;
+        transition: opacity 0.4s;
+      }
+      .step.on {
+        opacity: 1;
+      }
+      .step:before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 50%;
+        height: 0;
+        width: 2px;
+        background: var(--grad);
+        transform: translateY(-50%);
+        transition: height 0.5s;
+      }
+      .step.on:before {
+        height: 140px;
+      }
+      .num {
+        font-size: 0.875rem;
+        font-weight: 700;
+        background: var(--grad);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .step h3 {
+        font-size: clamp(1.6rem, 2.6vw, 2.25rem);
+        line-height: 1.15;
+        letter-spacing: -0.025em;
+        font-weight: 800;
+        margin-top: 12px;
+        max-width: 20ch;
+      }
+      .step p {
+        margin-top: 16px;
+        font-size: 1.0625rem;
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 46ch;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 22px;
+        list-style: none;
+      }
+      .tags li {
+        padding: 8px 14px;
+        border-radius: 999px;
+        border: 1px solid var(--line2);
+        background: rgba(255, 255, 255, 0.04);
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--soft);
+      }
+      .step-img {
+        display: none;
+      }
+      /* video */
+      .vbox {
+        border-radius: var(--r);
+        overflow: hidden;
+        border: 1px solid var(--line2);
+        box-shadow:
+          0 50px 100px -40px rgba(0, 0, 0, 0.9),
+          0 0 90px -30px rgba(59, 130, 246, 0.55);
+        background: #000;
+      }
+      .vbox {
+        position: relative;
+        cursor: pointer;
+      }
+      .vbox video {
+        width: 100%;
+        display: block;
+      }
+      .vplay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        border: 0;
+        background: rgba(37, 99, 235, 0.92);
+        box-shadow:
+          0 0 0 10px rgba(255, 255, 255, 0.18),
+          0 20px 50px rgba(0, 0, 0, 0.5);
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          opacity 0.25s;
+      }
+      .vplay:hover {
+        transform: translate(-50%, -50%) scale(1.08);
+      }
+      .vplay svg {
+        width: 34px;
+        height: 34px;
+        fill: #fff;
+        margin-left: 5px;
+      }
+      .vbox.playing .vplay {
+        opacity: 0;
+        pointer-events: none;
+      }
+      /* bento */
+      .bento {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+      }
+      .card {
+        grid-column: span 2;
+        padding: 32px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, var(--surface2), var(--surface));
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+      }
+      .card:hover {
+        border-color: var(--line2);
+        transform: translateY(-3px);
+      }
+      .card.w3 {
+        grid-column: span 3;
+      }
+      .card .ic {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(59, 130, 246, 0.14);
+        border: 1px solid var(--line2);
+        margin-bottom: 22px;
+      }
+      .card .ic svg {
+        width: 22px;
+        height: 22px;
+        stroke: var(--soft);
+      }
+      .card h3 {
+        font-size: 1.3125rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
+      }
+      .card p {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+      /* problem */
+      .prob {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .nums {
+        display: grid;
+        gap: 16px;
+      }
+      .n {
+        display: flex;
+        gap: 22px;
+        align-items: center;
+        padding: 26px 28px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+      .n b {
+        font-size: 2.4rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        min-width: 150px;
+      }
+      .n span {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .who {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 30px;
+        list-style: none;
+      }
+      .who li {
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid var(--line2);
+        background: rgba(255, 255, 255, 0.04);
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--soft);
+      }
+      /* 3 steps */
+      .three {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        position: relative;
+        text-align: center;
+      }
+      .three:before {
+        content: "";
+        position: absolute;
+        top: 32px;
+        left: 16%;
+        right: 16%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--line2),
+          transparent
+        );
+      }
+      .ls .o {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--grad);
+        font-size: 1.4rem;
+        font-weight: 800;
+        position: relative;
+        box-shadow:
+          0 0 0 8px var(--bg),
+          0 0 36px -4px rgba(59, 130, 246, 0.8);
+      }
+      .ls h3 {
+        font-size: 1.375rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .ls p {
+        margin: 12px auto 0;
+        max-width: 30ch;
+        line-height: 1.7;
+        color: var(--muted);
+      }
+      /* faq */
+      .faq {
+        max-width: 820px;
+        margin: 0 auto;
+      }
+      .faq details {
+        border-bottom: 1px solid var(--line);
+      }
+      .faq details:first-child {
+        border-top: 1px solid var(--line);
+      }
+      .faq summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        padding: 26px 4px;
+        cursor: pointer;
+        list-style: none;
+        font-size: 1.1875rem;
+        font-weight: 700;
+      }
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+      .faq summary:after {
+        content: "+";
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid var(--line2);
+        font-size: 1.25rem;
+        color: var(--soft);
+        transition: transform 0.3s;
+      }
+      .faq details[open] summary:after {
+        transform: rotate(45deg);
+      }
+      .faq details p {
+        padding: 0 4px 26px;
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 68ch;
+      }
+      /* final */
+      .final {
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+        padding: 80px 32px;
+        border-radius: 32px;
+        border: 1px solid var(--line2);
+        background:
+          radial-gradient(
+            600px 300px at 50% 0%,
+            rgba(59, 130, 246, 0.35),
+            transparent 70%
+          ),
+          linear-gradient(180deg, var(--surface2), var(--surface));
+      }
+      .final h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+      }
+      .final p {
+        color: var(--muted);
+        font-size: 1.125rem;
+        margin: 16px auto 0;
+        max-width: 52ch;
+        line-height: 1.7;
+      }
+      .bignum {
+        display: inline-flex;
+        align-items: center;
+        gap: 16px;
+        margin: 34px 0 12px;
+        padding: 18px 34px 18px 18px;
+        border-radius: 22px;
+        background: #fff;
+        color: #0b1527;
+        font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        box-shadow: 0 30px 70px -20px rgba(59, 130, 246, 0.6);
+        transition: transform 0.2s;
+      }
+      .bignum:hover {
+        transform: translateY(-2px);
+      }
+      .bignum i {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: var(--green);
+        display: grid;
+        place-items: center;
+      }
+      .final .hint {
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+      .final .row {
+        justify-content: center;
+        margin-top: 30px;
+      }
+      /* more */
+      .more {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .more a {
+        padding: 28px;
+        border-radius: var(--r);
+        border: 1px solid var(--line);
+        background: var(--surface);
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+      }
+      .more a:hover {
+        border-color: var(--line2);
+        transform: translateY(-3px);
+      }
+      .more h3 {
+        font-size: 1.2rem;
+        font-weight: 800;
+      }
+      .more p {
+        color: var(--muted);
+        margin-top: 8px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      .more span {
+        display: inline-block;
+        margin-top: 16px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--soft);
+      }
+      /* footer */
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 56px 0 32px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .fg {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 40px;
+      }
+      footer h4 {
+        color: var(--text);
+        font-size: 1rem;
+        margin-bottom: 14px;
+      }
+      footer ul {
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+      footer a:hover {
+        color: var(--text);
+      }
+      .badges {
+        display: flex;
+        gap: 8px;
+        margin-top: 18px;
+      }
+      .badges span {
+        border: 1px solid var(--line2);
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--soft);
+      }
+      .fb {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        flex-wrap: wrap;
+        margin-top: 40px;
+        padding-top: 22px;
+        border-top: 1px solid var(--line);
+        font-size: 0.85rem;
+      }
+      .mcall {
+        display: none;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s,
+          transform 0.7s;
+      }
+      .reveal.in {
+        opacity: 1;
+        transform: none;
+      }
+      @media (max-width: 980px) {
+        .nav,
+        .hdr .tel {
+          display: none;
+        }
+        .hero-g,
+        .prob {
+          grid-template-columns: 1fr;
+        }
+        .cluster {
+          height: 480px;
+          margin: 10px auto 0;
+        }
+        .dev-a,
+        .dev-c {
+          width: 170px;
+        }
+        .dev-b {
+          width: 210px;
+        }
+        .walk {
+          grid-template-columns: 1fr;
+        }
+        .stage-col {
+          display: none;
+        }
+        .steps {
+          border-left: 0;
+        }
+        .step {
+          min-height: 0;
+          opacity: 1;
+          padding: 0 0 64px;
+        }
+        .step:before {
+          display: none;
+        }
+        .step-img {
+          display: block;
+          margin-bottom: 26px;
+        }
+        .card,
+        .card.w3 {
+          grid-column: span 6;
+        }
+        .three,
+        .more,
+        .fg {
+          grid-template-columns: 1fr;
+        }
+        .three:before {
+          display: none;
+        }
+        .sec {
+          padding: 80px 0;
+        }
+        .mcall {
+          display: flex;
+          position: fixed;
+          left: 12px;
+          right: 12px;
+          bottom: 12px;
+          z-index: 60;
+        }
+        .mcall .btn {
+          width: 100%;
+        }
+        footer {
+          padding-bottom: 90px;
+        }
+      }
+      @media (max-width: 520px) {
+        .hdr .cta {
+          padding: 10px 14px;
+          font-size: 13px;
+        }
+        .brand {
+          font-size: 18px;
+        }
+        .chip {
+          font-size: 0.8rem;
+        }
+        .dev-a,
+        .dev-c {
+          display: none;
+        }
+        .n {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+        .n b {
+          min-width: 0;
+        }
+        .bignum {
+          padding: 14px 22px 14px 14px;
+        }
+        .bignum i {
+          width: 46px;
+          height: 46px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          animation: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hdr">
+      <div class="wrap">
+        <a class="brand" href="https://deificdigital.com/"
+          ><img
+            src="https://deificdigital.com/logo.webp"
+            onerror="
+              this.onerror = null;
+              this.src =
+                'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 34 34\'%3E%3Crect width=\'34\' height=\'34\' rx=\'8\' fill=\'%23d7141c\'/%3E%3Ctext x=\'17\' y=\'24\' font-family=\'Arial\' font-weight=\'700\' font-size=\'20\' fill=\'white\' text-anchor=\'middle\'%3Ed%3C/text%3E%3C/svg%3E';
+            "
+            alt=""
+            width="34"
+            height="34"
+          /><span>Deific <b>Digital</b></span></a
+        >
+        <nav class="nav">
+          <a href="https://deificdigital.com/">Home</a>
+          <a href="https://deificdigital.com/products">Products</a>
+          <a href="#how">How it works</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="acts">
+          <a class="tel" href="tel:+17712221044">+1 (771) 222-1044</a>
+          <a class="cta" href="#contact">Book a free demo</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="wrap">
+        <div class="crumb">
+          <a href="https://deificdigital.com/products">Products</a> / AI
+          Receptionist (US)
+        </div>
+        <div class="hero-g">
+          <div>
+            <h1>
+              Your 24/7 AI Receptionist:
+              <span class="grad-t">Answer, Book, Follow Up.</span>
+            </h1>
+            <p class="sub">
+              Every call to your dental clinic answered in under a second — day,
+              night and weekends. It books appointments, rebooks no-shows and
+              collects feedback, for far less than a $26/hour hire.
+            </p>
+            <div class="chip">
+              <i></i>Live demo line open now · Custom pricing: contact us
+            </div>
+            <div class="row">
+              <a class="btn btn-p" href="tel:+17712221044"
+                ><svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"
+                  /></svg
+                >Call the live demo</a
+              >
+              <a class="btn btn-g" href="#contact">Book a free demo</a>
+              <a class="btn btn-g" href="#video"
+                ><svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5.5v13l11-6.5z" /></svg
+                >Watch 2-min video</a
+              >
+            </div>
+            <div class="stats">
+              <div><b>24/7</b><span>Every call answered</span></div>
+              <div><b>&lt; 1 sec</b><span>To pick up</span></div>
+              <div><b>HIPAA</b><span>BAA signed</span></div>
+            </div>
+          </div>
+          <div class="cluster">
+            <img
+              class="dev dev-a"
+              src="../assets/img/phone-report.webp"
+              alt="Daily report in the clinic app"
+              width="507"
+              height="1079"
+            />
+            <img
+              class="dev dev-b"
+              src="../assets/img/phone-today.webp"
+              alt="Today's patients in the clinic app"
+              width="507"
+              height="1079"
+            />
+            <img
+              class="dev dev-c"
+              src="../assets/img/phone-alerts.webp"
+              alt="Instant alerts in the clinic app"
+              width="507"
+              height="1079"
+            />
+            <a class="live" href="tel:+17712221044"
+              ><span class="ic"
+                ><svg width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                  <path
+                    d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"
+                  /></svg></span
+              ><span
+                ><small>Hear it now</small><b>+1 (771) 222-1044</b></span
+              ></a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec walk-sec" id="how">
+      <div class="wrap">
+        <div class="head">
+          <h2 class="h2">See how it works, screen by screen</h2>
+          <p class="lead">
+            Follow one day at a dental clinic — from a 7 AM call to the evening
+            report.
+          </p>
+        </div>
+        <div class="walk">
+          <div class="stage-col">
+            <div class="stage" id="stage">
+              <div class="shot on">
+                <div class="win">
+                  <div class="bar"><i></i><i></i><i></i></div>
+                  <img
+                    src="../assets/img/live-call.webp"
+                    alt=""
+                    width="2160"
+                    height="1290"
+                  />
+                </div>
+              </div>
+              <div class="shot">
+                <div class="win">
+                  <div class="bar"><i></i><i></i><i></i></div>
+                  <img
+                    src="../assets/img/appointments.webp"
+                    alt=""
+                    width="2160"
+                    height="1290"
+                  />
+                </div>
+              </div>
+              <div class="shot">
+                <img
+                  class="ph"
+                  src="../assets/img/phone-alerts.webp"
+                  alt=""
+                  width="507"
+                  height="1079"
+                />
+              </div>
+              <div class="shot">
+                <div class="win">
+                  <div class="bar"><i></i><i></i><i></i></div>
+                  <img
+                    src="../assets/img/crm.webp"
+                    alt=""
+                    width="2160"
+                    height="1290"
+                  />
+                </div>
+              </div>
+              <div class="shot">
+                <div class="win">
+                  <div class="bar"><i></i><i></i><i></i></div>
+                  <img
+                    src="../assets/img/feedback.webp"
+                    alt=""
+                    width="2160"
+                    height="1290"
+                  />
+                </div>
+              </div>
+              <div class="shot">
+                <div class="win">
+                  <div class="bar"><i></i><i></i><i></i></div>
+                  <img
+                    src="../assets/img/report.webp"
+                    alt=""
+                    width="2160"
+                    height="1290"
+                  />
+                </div>
+              </div>
+              <div class="shot">
+                <img
+                  class="ph"
+                  src="../assets/img/phone-today.webp"
+                  alt=""
+                  width="507"
+                  height="1079"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="steps">
+            <div class="step on">
+              <div class="step-img win">
+                <div class="bar"><i></i><i></i><i></i></div>
+                <img
+                  loading="lazy"
+                  src="../assets/img/live-call.webp"
+                  alt="AI receptionist live call"
+                  width="2160"
+                  height="1290"
+                />
+              </div>
+              <div class="num">Screen 1 of 7 · Live call</div>
+              <h3>Every call answered, even at 7 AM</h3>
+              <p>
+                The AI picks up instantly, talks naturally and checks real
+                availability while the patient is on the line.
+              </p>
+              <ul class="tags">
+                <li>Books &amp; reschedules</li>
+                <li>Answers price questions</li>
+                <li>Transfers to staff</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img win">
+                <div class="bar"><i></i><i></i><i></i></div>
+                <img
+                  loading="lazy"
+                  src="../assets/img/appointments.webp"
+                  alt="Appointments calendar"
+                  width="2160"
+                  height="1290"
+                />
+              </div>
+              <div class="num">Screen 2 of 7 · Calendar</div>
+              <h3>Booked straight into your calendar</h3>
+              <p>
+                Each dentist's hours and services are respected — no double
+                bookings. The patient gets a confirmation text.
+              </p>
+              <ul class="tags">
+                <li>Per-dentist schedules</li>
+                <li>Reminder texts</li>
+                <li>Reply C to confirm</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img">
+                <img
+                  loading="lazy"
+                  src="../assets/img/phone-alerts.webp"
+                  alt="Phone alerts"
+                  width="507"
+                  height="1079"
+                  style="width: 240px; margin: 0 auto"
+                />
+              </div>
+              <div class="num">Screen 3 of 7 · Alerts</div>
+              <h3>You know the moment it happens</h3>
+              <p>
+                Instant alerts on your phone for every new booking, lead and low
+                rating.
+              </p>
+              <ul class="tags">
+                <li>iPhone &amp; Android</li>
+                <li>No patient names in alerts</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img win">
+                <div class="bar"><i></i><i></i><i></i></div>
+                <img
+                  loading="lazy"
+                  src="../assets/img/crm.webp"
+                  alt="CRM pipeline"
+                  width="2160"
+                  height="1290"
+                />
+              </div>
+              <div class="num">Screen 4 of 7 · CRM</div>
+              <h3>Every inquiry becomes a lead</h3>
+              <p>
+                Callers who aren't ready to book land in a simple pipeline with
+                a call-back task for your team.
+              </p>
+              <ul class="tags">
+                <li>Drag &amp; drop pipeline</li>
+                <li>Deal values</li>
+                <li>Follow-up tasks</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img win">
+                <div class="bar"><i></i><i></i><i></i></div>
+                <img
+                  loading="lazy"
+                  src="../assets/img/feedback.webp"
+                  alt="Patient feedback"
+                  width="2160"
+                  height="1290"
+                />
+              </div>
+              <div class="num">Screen 5 of 7 · Follow-ups</div>
+              <h3>No-shows rebooked. Feedback collected.</h3>
+              <p>
+                Tap came or no-show. The AI calls no-shows to rebook, and asks
+                patients who came how their visit went.
+              </p>
+              <ul class="tags">
+                <li>Auto rebooking calls</li>
+                <li>1–5 ratings</li>
+                <li>Low-score alerts</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img win">
+                <div class="bar"><i></i><i></i><i></i></div>
+                <img
+                  loading="lazy"
+                  src="../assets/img/report.webp"
+                  alt="Daily report"
+                  width="2160"
+                  height="1290"
+                />
+              </div>
+              <div class="num">Screen 6 of 7 · Daily report</div>
+              <h3>A daily report every evening</h3>
+              <p>
+                Who came, who didn't, and everything the AI handled today — on
+                your phone at the time you choose.
+              </p>
+              <ul class="tags">
+                <li>Per-dentist view</li>
+                <li>Call summaries</li>
+                <li>Encrypted transcripts</li>
+              </ul>
+            </div>
+            <div class="step">
+              <div class="step-img">
+                <img
+                  loading="lazy"
+                  src="../assets/img/phone-today.webp"
+                  alt="Clinic app"
+                  width="507"
+                  height="1079"
+                  style="width: 240px; margin: 0 auto"
+                />
+              </div>
+              <div class="num">Screen 7 of 7 · Mobile app</div>
+              <h3>Your front desk in your pocket</h3>
+              <p>
+                Today's patients, one-tap came / no-show, leads and reports —
+                synced with the web dashboard.
+              </p>
+              <ul class="tags">
+                <li>Owner &amp; staff logins</li>
+                <li>Face ID</li>
+                <li>Auto logoff</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="video" style="padding-top: 40px">
+      <div class="wrap">
+        <div class="head c reveal">
+          <h2 class="h2">Watch a real call, start to finish</h2>
+          <p class="lead">
+            Two minutes: a new patient books at 7 AM, a no-show is rebooked, and
+            the owner gets the daily report.
+          </p>
+        </div>
+        <div class="vbox reveal" id="vbox">
+          <video
+            id="demoVideo"
+            preload="none"
+            playsinline
+            poster="../assets/img/video-poster.webp"
+          >
+            <source
+              src="../assets/video/ai-receptionist-demo.mp4"
+              type="video/mp4"
+            /></video
+          ><button
+            class="vplay"
+            id="vplay"
+            type="button"
+            aria-label="Play demo video"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 40px">
+      <div class="wrap">
+        <div class="head reveal">
+          <h2 class="h2">Everything your front desk needs</h2>
+        </div>
+        <div class="bento">
+          <div class="card w3 reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"
+                />
+              </svg>
+            </div>
+            <h3>Answers &amp; books, 24/7</h3>
+            <p>
+              Natural voice, new patient intake, booking, rescheduling and live
+              transfer to your staff.
+            </p>
+          </div>
+          <div class="card w3 reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M17 2l4 4-4 4" />
+                <path d="M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4" />
+                <path d="M21 13v2a3 3 0 0 1-3 3H3" />
+              </svg>
+            </div>
+            <h3>Rebooks no-shows</h3>
+            <p>
+              Calls patients who missed their visit and finds them a new time —
+              inside your calling hours.
+            </p>
+          </div>
+          <div class="card reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="9" cy="8" r="3.5" />
+                <path
+                  d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.7 2.6 3 5.2"
+                />
+              </svg>
+            </div>
+            <h3>Built-in CRM</h3>
+            <p>
+              Every inquiry saved as a lead, with tasks so nobody is forgotten.
+            </p>
+          </div>
+          <div class="card reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"
+                />
+              </svg>
+            </div>
+            <h3>Feedback</h3>
+            <p>
+              Post-visit ratings by call or text, and instant alerts for low
+              scores.
+            </p>
+          </div>
+          <div class="card reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+              >
+                <path d="M4 20V10M10 20V4M16 20v-7M22 20H2" />
+              </svg>
+            </div>
+            <h3>Daily report</h3>
+            <p>Who came, who didn't and what the AI did — every evening.</p>
+          </div>
+          <div class="card w3 reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="11" width="16" height="10" rx="2" />
+                <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+              </svg>
+            </div>
+            <h3>Built for HIPAA</h3>
+            <p>
+              Encryption, two-factor login, audit log and auto logoff. We sign a
+              BAA with your clinic.
+            </p>
+          </div>
+          <div class="card w3 reveal">
+            <div class="ic">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+            <h3>Keeps your number</h3>
+            <p>
+              Works with your existing clinic number. Front desk first and AI as
+              backup — or after hours only.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 40px">
+      <div class="wrap prob">
+        <div class="reveal">
+          <h2 class="h2">Missed calls are missed patients</h2>
+          <p class="lead">
+            When the front desk is busy or closed, calls go to voicemail — and
+            new patients call the next clinic. No-shows leave empty chairs, and
+            nobody has time to call them back.
+          </p>
+          <ul class="who">
+            <li>Solo practices</li>
+            <li>Group practices</li>
+            <li>Orthodontics</li>
+            <li>Pediatric dental</li>
+            <li>Cosmetic &amp; implants</li>
+          </ul>
+        </div>
+        <div class="nums reveal">
+          <div class="n">
+            <b>$26/hr</b
+            ><span>for a receptionist who covers business hours only</span>
+          </div>
+          <div class="n">
+            <b class="grad-t">24/7</b
+            ><span
+              >for the AI — nights, weekends and lunch breaks included</span
+            >
+          </div>
+          <div class="n">
+            <b>0</b
+            ><span>missed calls, unanswered leads or forgotten no-shows</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 40px">
+      <div class="wrap">
+        <div class="head c reveal">
+          <h2 class="h2">Live in three simple steps</h2>
+        </div>
+        <div class="three">
+          <div class="ls reveal">
+            <div class="o">1</div>
+            <h3>Book a demo</h3>
+            <p>A 15-minute call about your hours, dentists and services.</p>
+          </div>
+          <div class="ls reveal">
+            <div class="o">2</div>
+            <h3>We set it up</h3>
+            <p>
+              We train the AI on your clinic, connect your number and sign the
+              BAA.
+            </p>
+          </div>
+          <div class="ls reveal">
+            <div class="o">3</div>
+            <h3>You grow</h3>
+            <p>Every call answered, more bookings and fewer empty chairs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="faq" style="padding-top: 40px">
+      <div class="wrap">
+        <div class="head c reveal">
+          <h2 class="h2">Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>What does the AI receptionist do?</summary>
+            <p>
+              It answers your clinic's phone 24/7, books and reschedules
+              appointments in your calendar, saves every inquiry as a lead,
+              calls no-shows to rebook, calls patients for feedback, and sends
+              you a daily report.
+            </p>
+          </details>
+          <details>
+            <summary>Does it sound like a robot?</summary>
+            <p>
+              No — it speaks naturally and handles interruptions. Call our live
+              demo at
+              <a
+                href="tel:+17712221044"
+                style="color: var(--soft); font-weight: 700"
+                >+1 (771) 222-1044</a
+              >
+              and try booking a cleaning.
+            </p>
+          </details>
+          <details>
+            <summary>Can I keep my clinic's phone number?</summary>
+            <p>
+              Yes. Your current number forwards calls to the AI — for example
+              only when the front desk doesn't pick up, when the line is busy,
+              or after hours.
+            </p>
+          </details>
+          <details>
+            <summary>Is it HIPAA compliant?</summary>
+            <p>
+              It's built for HIPAA: encrypted patient data, two-factor login,
+              audit logs and automatic logoff. We sign a Business Associate
+              Agreement with your clinic and use vendors that sign BAAs with us.
+            </p>
+          </details>
+          <details>
+            <summary>How much does it cost?</summary>
+            <p>
+              A simple monthly fee based on your clinic's size and call volume —
+              far less than a $26/hour receptionist. Book a demo for a quote.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contact" style="padding-top: 40px">
+      <div class="wrap">
+        <div class="final reveal">
+          <h2>Hear it for yourself</h2>
+          <p>
+            Call our AI receptionist right now — it's live 24/7. Try booking a
+            cleaning, asking about prices, or rescheduling.
+          </p>
+          <a class="bignum" href="tel:+17712221044"
+            ><i
+              ><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff">
+                <path
+                  d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"
+                /></svg></i
+            >+1 (771) 222-1044</a
+          >
+          <div class="row">
+            <a
+              class="btn btn-p"
+              href="mailto:hello@deificdigital.com?subject=AI%20Receptionist%20demo%20for%20my%20clinic&body=Clinic%20name%3A%0ACity%2C%20State%3A%0ANumber%20of%20dentists%3A%0ABest%20time%20for%20a%2015-minute%20call%3A"
+              >Book a free demo<svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" /></svg
+            ></a>
+            <a class="btn btn-g" href="mailto:hello@deificdigital.com"
+              >hello@deificdigital.com</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" style="padding-top: 0">
+      <div class="wrap">
+        <div class="head reveal" style="margin-bottom: 32px">
+          <h2 class="h2" style="font-size: clamp(1.6rem, 3vw, 2.2rem)">
+            More AI products
+          </h2>
+        </div>
+        <div class="more">
+          <a class="reveal" href="https://deificdigital.com/products"
+            ><h3>PropAI</h3>
+            <p>
+              WhatsApp AI agent for real estate that scores leads and books site
+              visits.
+            </p>
+            <span>Learn more →</span></a
+          >
+          <a class="reveal" href="https://deificdigital.com/products"
+            ><h3>AI Sales Agent</h3>
+            <p>
+              Follows up with every lead by call, text and email until they
+              book.
+            </p>
+            <span>Learn more →</span></a
+          >
+          <a
+            class="reveal"
+            href="https://deificdigital.com/products/liv-pro"
+            ><h3>LIVpro</h3>
+            <p>
+              Ready-to-launch live streaming app with gifts, rooms and creator
+              earnings.
+            </p>
+            <span>Learn more →</span></a
+          >
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap">
+        <div class="fg">
+          <div>
+            <a
+              class="brand"
+              href="https://deificdigital.com/"
+              style="color: var(--text)"
+              ><img
+                src="https://deificdigital.com/logo.webp"
+                onerror="
+                  this.onerror = null;
+                  this.src =
+                    'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 34 34\'%3E%3Crect width=\'34\' height=\'34\' rx=\'8\' fill=\'%23d7141c\'/%3E%3Ctext x=\'17\' y=\'24\' font-family=\'Arial\' font-weight=\'700\' font-size=\'20\' fill=\'white\' text-anchor=\'middle\'%3Ed%3C/text%3E%3C/svg%3E';
+                "
+                alt=""
+                width="34"
+                height="34"
+              /><span>Deific <b>Digital</b></span></a
+            >
+            <p style="margin-top: 14px; max-width: 40ch; line-height: 1.7">
+              Custom AI agents and automation for businesses — AI receptionists,
+              sales agents, WhatsApp agents and apps.
+            </p>
+            <div class="badges">
+              <span>ISO 9001</span><span>ISO/IEC 27001</span>
+            </div>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li>
+                <a href="tel:+17712221044">US demo line: +1 (771) 222-1044</a>
+              </li>
+              <li>
+                <a href="mailto:hello@deificdigital.com"
+                  >hello@deificdigital.com</a
+                >
+              </li>
+              <li><a href="tel:+919250119045">+91 92501 19045</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Offices</h4>
+            <ul>
+              <li>8th floor, STPI, UPSID Complex, Kanpur, UP 208024, India</li>
+              <li>C-270, Sector 63, Noida, UP 201301, India</li>
+            </ul>
+          </div>
+        </div>
+        <div class="fb">
+          <span>© 2026 Deific Digital. All rights reserved.</span
+          ><span
+            ><a href="https://deificdigital.com/terms-and-conditions">Terms</a> ·
+            <a href="https://deificdigital.com/privacy-policy">Privacy</a></span
+          >
+        </div>
+      </div>
+    </footer>
+
+    <div class="mcall">
+      <a class="btn btn-p" href="tel:+17712221044"
+        >📞 Call the live demo: +1 (771) 222-1044</a
+      >
+    </div>
+
+    <script>
+      (function () {
+        var steps = [].slice.call(document.querySelectorAll(".step")),
+          shots = [].slice.call(document.querySelectorAll("#stage .shot"));
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) {
+                  var i = steps.indexOf(e.target);
+                  steps.forEach(function (s, k) {
+                    s.classList.toggle("on", k === i);
+                  });
+                  shots.forEach(function (s, k) {
+                    s.classList.toggle("on", k === i);
+                  });
+                }
+              });
+            },
+            { rootMargin: "-45% 0px -45% 0px" },
+          );
+          steps.forEach(function (s) {
+            io.observe(s);
+          });
+          var rv = new IntersectionObserver(
+            function (es) {
+              es.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("in");
+                  rv.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12 },
+          );
+          document.querySelectorAll(".reveal").forEach(function (el) {
+            rv.observe(el);
+          });
+        } else
+          document.querySelectorAll(".reveal").forEach(function (el) {
+            el.classList.add("in");
+          });
+      })();
+    </script>
+    <script>
+      (function () {
+        var b = document.getElementById("vbox"),
+          v = document.getElementById("demoVideo");
+        if (!b || !v) return;
+        function t() {
+          if (v.paused) {
+            v.play();
+          } else {
+            v.pause();
+          }
+        }
+        b.addEventListener("click", t);
+        v.addEventListener("play", function () {
+          b.classList.add("playing");
+        });
+        v.addEventListener("pause", function () {
+          b.classList.remove("playing");
+        });
+        v.addEventListener("ended", function () {
+          b.classList.remove("playing");
+        });
+      })();
+    </script>
+  </body>
+</html>

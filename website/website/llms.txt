@@ -1,0 +1,47 @@
+# Deific Digital
+> Custom AI agents and business automation for companies in India and the UAE: AI receptionist, WhatsApp sales agent, customer support bots, CRM and software development. Based in Kanpur, India.
+
+## Main pages
+- [Home](https://deificdigital.com/): AI agents and automation overview
+- [AI agents](https://deificdigital.com/ai-agents)
+- [Services](https://deificdigital.com/services)
+- [Products](https://deificdigital.com/products)
+- [PropAI - real estate CRM](https://deificdigital.com/propai)
+- [UAE](https://deificdigital.com/uae)
+- [Portfolio](https://deificdigital.com/portfolio)
+- [About](https://deificdigital.com/about)
+- [Contact](https://deificdigital.com/contact)
+- [Hospital Management AI](https://deificdigital.com/industries/hospital-management-ai)
+- [CA Firm Automation](https://deificdigital.com/industries/ca-firm-automation)
+- [Car Dealer Automation](https://deificdigital.com/industries/car-dealer-automation)
+- [Smart City Solutions](https://deificdigital.com/industries/smart-city-solutions)
+- [Game Development](https://deificdigital.com/services/game-development)
+
+## Services
+- [Business process automation services](https://deificdigital.com/services/business-process-automation)
+- [AI chatbot development](https://deificdigital.com/services/ai-chatbot-development)
+- [WhatsApp business automation](https://deificdigital.com/services/whatsapp-business-automation)
+- [AI integration services](https://deificdigital.com/services/ai-integration-services)
+- [Generative AI development](https://deificdigital.com/services/generative-ai-development)
+- [Android app development](https://deificdigital.com/services/android-app-development)
+- [iOS app development](https://deificdigital.com/services/ios-app-development)
+- [Cross-platform app development](https://deificdigital.com/services/cross-platform-app-development)
+- [Hybrid app development](https://deificdigital.com/services/hybrid-app-development)
+- [Mobile game development](https://deificdigital.com/services/game-development)
+- [MVP & SaaS development](https://deificdigital.com/services/mvp-development)
+- [Startup idea validation](https://deificdigital.com/services/startup-idea-validation)
+- [SEO services](https://deificdigital.com/services/seo-services)
+- [Social media marketing](https://deificdigital.com/services/social-media-marketing)
+- [Meta ads agency](https://deificdigital.com/services/meta-ads-agency)
+- [Google Business Profile optimization](https://deificdigital.com/services/google-business-profile-optimization)
+
+## Products
+- PropAI: WhatsApp AI and CRM for real estate
+- AI Review Ninja Pro: customer reviews and Google Business Profile ranking (https://reviewninjapro.com)
+- Monica AI: WhatsApp bot for customer replies and lead capture
+- CA Automation: GST and document reminders for CA firms
+- Medi Assist: appointment booking and patient queries for clinics and hospitals
+
+## Contact
+- WhatsApp / phone: +91 87502 00899
+- Email: hello@deificdigital.com

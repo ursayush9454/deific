@@ -6533,3 +6533,10 @@ html[dir="rtl"] .site-header > div {
 [dir="rtl"] .dd-seo-wrap {
   text-align: right;
 }
+
+/* ---- SEO answer blocks: steps + comparison tables (added) ---- */
+.dd-seo ol { margin: 0 0 14px; padding-left: 22px; }
+.dd-seo ol li { margin-bottom: 6px; }
+.dd-seo-table { width: 100%; border-collapse: collapse; margin: 0 0 18px; font-size: 15px; }
+.dd-seo-table th, .dd-seo-table td { border: 1px solid #dce2ee; padding: 10px 12px; text-align: left; vertical-align: top; }
+.dd-seo-table th { background: #f1f4fa; color: #0b1f4d; font-weight: 600; }
